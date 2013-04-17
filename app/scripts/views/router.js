@@ -28,6 +28,8 @@ define([
 
         appRouter.on('route:showYuyue', function(){
             console.log('showYuyue');
+            var yuyueView = new YuyueView();
+            yuyueView.render();
         });
 
         Backbone.history.start();
