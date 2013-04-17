@@ -1,5 +1,6 @@
 #意在通过requirejs和backbone合理的组织代码结构,提高可维护可协作性。v1.0.0 by Enlei
 
+
 ## install
 
 ###先安装[nodeJS](http://nodejs.org/)
@@ -52,5 +53,6 @@
             -text.js 静态文件载入类库
         -index.html
 
-
-
+####注意：直接预览index.html会显示错误,通过2种方法解决
+* 1 配置到web服务器 b.m.xiaomi.com
+* 2 通过requirejs的r.js编译,预览dist/index.html
