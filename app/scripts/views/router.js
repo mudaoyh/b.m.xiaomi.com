@@ -12,6 +12,8 @@ define([
         routes: {
             'yuyue': 'showYuyue',
             '*actions': 'showHome'
+        },
+        initialize: function(){
         }
     });
 
@@ -22,14 +24,12 @@ define([
 
         appRouter.on('route:showHome', function(actions){
             console.log('showHome actions: '+ actions);
-            var indexView = new IndexView();
-            indexView.render();
+            IndexView.render();
         });
 
         appRouter.on('route:showYuyue', function(){
             console.log('showYuyue');
-            var yuyueView = new YuyueView();
-            yuyueView.render();
+            YuyueView.render();
         });
 
         Backbone.history.start();

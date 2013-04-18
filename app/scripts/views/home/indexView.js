@@ -18,5 +18,5 @@ define([
         }
     });
 
-    return IndexView;
+    return new IndexView;
 });

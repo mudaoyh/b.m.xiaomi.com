@@ -10,6 +10,9 @@ define([
 
     var YuyueView = Backbone.View.extend({
         el: $('#app'),
+        events: {
+            'click #btn': 'test'
+        },
         initialize: function(){
             console.log('yuyueView载入yuyue预约模板');
         },
@@ -19,11 +22,11 @@ define([
             };
             var compileTemplate = _.template(YuyueTemplate, data);
             this.$el.html(compileTemplate);
-            this.$el.find('#btn').on('click', function(){
-                alert('click event');
-            });
+        },
+        test: function(){
+            console.log(1);
         }
     });
 
-    return YuyueView;
+    return new YuyueView;
 });
