@@ -3,17 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>基于backbone的小米商城</title>
+    <link rel="stylesheet" href="http://p.www.xiaomi.com/m/app/v2/css/xmapp0416a.css"/>
     <script type="text/javascript" data-main="scripts/main.js" src="scripts/vendor/requirejs/require.js"></script>
 </head>
 <body>
-    <div id="nav">
-        <ul>
-            <li><a href="#">首页</a></li>
-            <li><a href="#/yuyue">预约</a></li>
-        </ul>
-    </div>
-    <div id="app">
-        loading
+    <div class="xm_app">
+        <div class="viewport">
+            <div class="header" id="header">
+                <h1 class="logo">
+                    <a href="/">
+                        <img src="http://p.www.xiaomi.com/m/app/v2/images/logo_m.png" alt="小米商城"/>
+                    </a>
+                </h1>
+                <div class="nav">
+                    <ul>
+                        <li class="user"><a href="#/yuyue">预约</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="viewbody">
+                loading...
+            </div>
+            <div class="footer" id="footer">
+                <div class="box box_01">
+                    <a href="">登录</a>
+                    <a href="">注册</a>
+                    <a href="">返回顶部</a>
+                </div>
+                <div class="box box_02">
+                    <a href="">电脑版</a>
+                </div>
+                <div class="box box_03">
+                    <p>&copy; 2013 m.xiaomi.com</p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

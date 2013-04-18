@@ -1,1 +1,23 @@
-<strong>indexTemplate 首页内容</strong>
+<div class="ad_list">
+    <ul>
+        <% _.each(items, function(item){ %>
+            <li>
+                <div class="type_ad">
+                    <a href="<%= item.activity_url %>">
+                        <div class="imgurl">
+                            <img src="<%= item.image_url %>" alt=""/>
+                        </div>
+                        <div class="info">
+                            <div class="product_name">
+                                <span class="name"><%= item.product.product_name %></span>
+                            </div>
+                            <div class="product_detail">
+                                <span class="detail"><%= item.product.product_detail %></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+        <% }) %>
+    </ul>
+</div>

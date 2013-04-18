@@ -9,7 +9,7 @@ define([
 ], function($, _, Backbone, YuyueTemplate){
 
     var YuyueView = Backbone.View.extend({
-        el: $('#app'),
+        el: $('#viewbody'),
         events: {
             'click #btn': 'test'
         },
