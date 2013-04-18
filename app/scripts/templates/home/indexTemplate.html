@@ -38,7 +38,10 @@
                 </div>
                 <% } %>
                 <% if(item.item_type == '1'){ %>
-                    <div class="type_product">
+                    <div <% if(item.product.activity_type == '-1'){ %>class="type_product"<% } %>
+                        <% if(item.product.activity_type == '0'){ %>class="type_product type_0"<% } %>
+                        <% if(item.product.activity_type == '2'){ %>class="type_product type_2"<% } %>
+                        <% if(item.product.activity_type == '1'){ %>class="type_product type_1"<% } %> >
                         <a href="#">
                             <div class="imgurl">
                                 <img src="<%= item.image_url %>"/>
