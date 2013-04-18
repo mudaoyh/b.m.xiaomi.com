@@ -14,7 +14,14 @@ define([
             console.log('yuyueView载入yuyue预约模板');
         },
         render: function(){
-            this.$el.html(YuyueTemplate);
+            var data = {
+                title: '预约模板'
+            };
+            var compileTemplate = _.template(YuyueTemplate, data);
+            this.$el.html(compileTemplate);
+            this.$el.find('#btn').on('click', function(){
+                alert('click event');
+            });
         }
     });
 
