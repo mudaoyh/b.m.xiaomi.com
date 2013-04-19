@@ -48,10 +48,17 @@
                             </div>
                             <div class="info">
                                 <div class="product_name">
-                                    <span class="price">&yen;<%= item.product.full_price %></span>
+                                    <% if(item.product.product_price !== item.product.full_price){ %>
+                                        <span class="price">&yen;<%= item.product.product_price %></span>
+                                    <% }else{ %>
+                                        <span class="price">&yen;<%= item.product.full_price %></span>
+                                    <% } %>
                                     <span class="name"><%= item.product.product_name %></span>
                                 </div>
                                 <div class="product_detail">
+                                    <% if(item.product.product_price !== item.product.full_price){ %>
+                                        <span class="market_price">&yen;<%= item.product.full_price %></span>
+                                    <% } %>
                                     <span class="detail"><%= item.product.product_detail %></span>
                                 </div>
                             </div>

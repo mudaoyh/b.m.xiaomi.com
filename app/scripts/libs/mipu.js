@@ -19,7 +19,7 @@ define(['jquery'], function($){
                 version: 'v1',
                 that: this
             };
-            var setting = $.extend({}, defaults, options);
+            var setting = $.extend(true, defaults, options);
             $.ajax({
                 url: this.app_path + setting.version + '/' + setting.url,
                 data: setting.param,
