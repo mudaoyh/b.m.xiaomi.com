@@ -25,7 +25,6 @@ define([
             this.$el.html(compileTemplate);
         },
         login: function(){
-            debugger;
             Mipu.doLogin();
         }
     });
