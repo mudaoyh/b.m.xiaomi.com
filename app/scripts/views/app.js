@@ -12,10 +12,7 @@ define([
     var init = function(){
         console.log('app.js 执行init方法');
         Router.init();
-        if(Mipu.isApp()){
-            alert('is app');
-        }else{
-            alert('is web');
+        if(!Mipu.isApp()){
             HeaderView.render();
             FooterView.render();
         }
