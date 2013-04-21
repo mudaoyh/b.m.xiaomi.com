@@ -3,9 +3,11 @@
 * 负责载入路由，和初始化一些配置
 * */
 define([
+    'libs/mipu',
     'views/router',
-    'libs/mipu'
-], function(Router, Mipu){
+    'views/layout/headerView',
+    'views/layout/footerView'
+], function(Mipu, Router, HeaderView, FooterView){
 
     var init = function(){
         console.log('app.js 执行init方法');
@@ -14,6 +16,8 @@ define([
             alert('is app');
         }else{
             alert('is web');
+            HeaderView.render();
+            FooterView.render();
         }
     };
 
