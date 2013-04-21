@@ -5,13 +5,14 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'libs/mipu',
     'text!templates/home/yuyueTemplate.html'
-], function($, _, Backbone, YuyueTemplate){
+], function($, _, Backbone, Mipu, YuyueTemplate){
 
     var YuyueView = Backbone.View.extend({
         el: $('#viewbody'),
         events: {
-            'click #btn': 'test'
+            'click #btn': 'login'
         },
         initialize: function(){
             console.log('yuyueView载入yuyue预约模板');
@@ -23,8 +24,9 @@ define([
             var compileTemplate = _.template(YuyueTemplate, data);
             this.$el.html(compileTemplate);
         },
-        test: function(){
-            console.log(1);
+        login: function(){
+            debugger;
+            Mipu.doLogin();
         }
     });
 

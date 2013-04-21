@@ -5,6 +5,7 @@ define(['jquery'], function($){
     return {
         client_id: '180100031013',
         app_path: 'http://app.shopapi.xiaomi.com/',
+        sso_path: 'http://app.shoapi.xiaomi.com/v1/authorize/sso?client_id=',
         request: function(options, callback){
             /*
             * url: api路径
@@ -28,6 +29,9 @@ define(['jquery'], function($){
                     callback(res, setting.that);
                 }
             });
+        },
+        doLogin: function(){
+            location.href = this.sso_path+this.client_id+'&callback='+encodeURIComponent(location.href);
         },
         isApp: function(){
             try{
