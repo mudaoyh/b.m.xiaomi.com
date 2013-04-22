@@ -1,35 +1,34 @@
-/*
-* indexView.js 首页控制器
-* */
+/**
+ * categoryView.js 产品列表页
+ */
 define([
     'jquery',
     'underscore',
     'backbone',
     'libs/mipu',
-    'text!templates/home/indexTemplate.html'
-], function($, _, Backbone, Mipu, indexTemplate){
+    'text!templates/product/categoryTemplate.html'
+], function($, _, Backbone, Mipu, CategoryTemplate){
 
-    var IndexView = Backbone.View.extend({
+    var CategoryView = Backbone.View.extend({
         el: $('#viewbody'),
         initialize: function(){
-            console.log('indexView载入render首页模板');
+            console.log('CategoryTemplate载入render列表模板');
         },
         render: function(){
             var options = {
-                url: '/home/index',
-                version: 'v2',
+                url: '/product/category',
                 that: this
             };
             Mipu.request(options, function(res, self){
                 var data, compileTemplate;
                 data = {
-                    'items' : res.data.items
+                    'categroies': res.data.categroies
                 };
-                compileTemplate = _.template(indexTemplate, data);
+                compileTemplate = $.tmpl(CategoryTemplate, data);
                 self.$el.html(compileTemplate);
             });
         }
     });
 
-    return new IndexView;
+    return new CategoryView;
 });
