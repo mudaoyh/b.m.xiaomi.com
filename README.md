@@ -1,4 +1,4 @@
-#意在通过requirejs和backbone合理的组织代码结构,提高可维护可协作性。v1.0.0 by Enlei
+ #意在通过requirejs和backbone合理的组织代码结构,提高可维护可协作性。v1.0.0 by Enlei
 
 
 ## install
