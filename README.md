@@ -57,4 +57,3 @@
 * 1 配置到web服务器 b.m.xiaomi.com
 * 2 通过requirejs的r.js编译,预览dist/index.html
 * 3 html模板引擎使用jquery-tmpl
-* 4 aaaa
