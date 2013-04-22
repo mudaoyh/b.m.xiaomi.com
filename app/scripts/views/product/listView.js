@@ -10,8 +10,21 @@ define([
 ], function($, _, Backbone, Mipu, ListTemplate){
 
     var ListView = Backbone.View.extend({
+        el: $('#viewbody'),
         render: function(cate_id){
-            debugger;
+            var options = {
+                url: '/product/list',
+                param: {
+                    'cateid': cate_id
+                },
+                that: this
+            };
+            Mipu.request(options, function(res, self){
+                var data, compileTemplate;
+                data = res.data;
+                compileTemplate = $.tmpl(ListTemplate, data);
+                self.$el.html(compileTemplate);
+            });
         }
     });
 
