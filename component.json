@@ -4,6 +4,7 @@
     "dependencies": {
         "requirejs": null,
         "jquery": null,
+        "jquery-tmpl": null,
         "backbone-amd": null,
         "underscore-amd": null
     }
