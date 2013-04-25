@@ -6,8 +6,9 @@ define([
     'underscore',
     'backbone',
     'libs/mipu',
+    'libs/util',
     'text!templates/product/categoryTemplate.html'
-], function($, _, Backbone, Mipu, CategoryTemplate){
+], function($, _, Backbone, Mipu, Util,  CategoryTemplate){
 
     var CategoryView = Backbone.View.extend({
         el: $('#viewbody'),

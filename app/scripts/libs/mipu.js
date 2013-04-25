@@ -78,6 +78,20 @@ define([
             setTimeout(function(){
                 popup.fadeOut('slow');
             }, 2500)
+        },
+        activityControl: function(actions, self, callback){
+            var options, data;
+            options = {
+                url: '/activity/control',
+                that: self
+            };
+            if(!actions){
+                this.request(options, function(res, that){
+                    callback(true, res.data, that);
+                });
+            }else{
+                callback(false);
+            }
         }
     };
 });

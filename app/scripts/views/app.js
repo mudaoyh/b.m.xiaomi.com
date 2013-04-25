@@ -11,7 +11,8 @@ define([
 
     var init = function(){
         console.log('app.js 执行init方法');
-        Router.init();
+        var appRouter = new Router();
+
         if(!Util.isApp()){
             HeaderView.render();
             FooterView.render();

@@ -22,7 +22,6 @@ define([
             Mipu.request(options, function(res, self){
                 var data, compileTemplate;
                 data = res.data;
-                debugger;
                 compileTemplate = $.tmpl(ListTemplate, data);
                 self.$el.html(compileTemplate);
             });
