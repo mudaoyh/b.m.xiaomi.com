@@ -15,7 +15,9 @@ define([
         routes: {
             'home/index1': 'showIndex',
             'home/yuyue': 'showYuyue',
-            'home/qianggou': 'showQianggou',
+            'home/qianggounew': 'showQianggou',
+            'account/index': 'showAccount',
+            'shopping/index': 'showShopping',
             'product/category': 'showProductCategory',
             'product/list/:cate_id': 'showProductList',
             'product/list/:cate_id/:adapt': 'showProductList',
@@ -23,6 +25,12 @@ define([
         },
         initialize: function(){
             Backbone.history.start();
+        },
+        showAccount: function(){
+            console.error('showAccount');
+        },
+        showShopping: function(){
+            console.error('showShopping');
         },
         showIndex: function(){
             console.error('showIndex');
