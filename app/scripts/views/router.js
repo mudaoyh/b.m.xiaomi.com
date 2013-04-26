@@ -1,6 +1,6 @@
 /*
-* router.js 路由设置
-* */
+ * router.js 路由设置
+ * */
 define([
     'underscore',
     'backbone',
@@ -9,7 +9,15 @@ define([
     'views/home/yuyueView',
     'views/product/categoryView',
     'views/product/listView'
-], function(_, Backbone, Mipu, IndexView, YuyueView, CategoryView, ListView){
+], function(
+    _,
+    Backbone,
+    Mipu,
+    IndexView,
+    YuyueView,
+    CategoryView,
+    ListView
+    ){
 
     var AppRouter = Backbone.Router.extend({
         routes: {
@@ -21,6 +29,7 @@ define([
             'product/category': 'showProductCategory',
             'product/list/:cate_id': 'showProductList',
             'product/list/:cate_id/:adapt': 'showProductList',
+            'product/view/:product_id': 'showProductView',
             '*actions': 'showDefault'
         },
         initialize: function(){
@@ -47,9 +56,12 @@ define([
             console.error('showProductCategory');
             CategoryView.render();
         },
-        showProductList: function(cate_id){
-            console.error('showProductList cate_id: '+cate_id);
+        showProductList: function(cate_id, adapt){
+            console.error('showProductList cate_id: '+cate_id+ 'adapt: ' +adapt);
             ListView.render(cate_id);
+        },
+        showProductView: function(product_id){
+            console.error('showProductView: '+product_id);
         },
         showDefault: function(actions){
             var self = this;
