@@ -26,9 +26,10 @@ define([
                 that: this
             };
             Mipu.request(options, function(res, self){
-                var compileTemplate;
+                var compileTemplate, data;
                 if(res.result == 'ok'){
-                    compileTemplate = $.tmpl(LogoutTemplate);
+                    data = res.data;
+                    compileTemplate = $.tmpl(LogoutTemplate, data);
                     console.log('已登录');
                 }else{
                     compileTemplate = $.tmpl(LoginTemplate);
