@@ -8,7 +8,8 @@ define([
     'views/home/indexView',
     'views/home/yuyueView',
     'views/product/categoryView',
-    'views/product/listView'
+    'views/product/listView',
+    'views/account/indexView'
 ], function(
     _,
     Backbone,
@@ -16,7 +17,8 @@ define([
     IndexView,
     YuyueView,
     CategoryView,
-    ListView
+    ListView,
+    AccountView
     ){
 
     var AppRouter = Backbone.Router.extend({
@@ -37,6 +39,7 @@ define([
         },
         showAccount: function(){
             console.error('showAccount');
+            AccountView.render();
         },
         showShopping: function(){
             console.error('showShopping');

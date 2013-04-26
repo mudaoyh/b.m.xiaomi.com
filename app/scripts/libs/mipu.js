@@ -9,11 +9,15 @@ define([
         client_id: '180100031013',
         app_path: 'http://app.shopapi.xiaomi.com/',
         sso_path: 'http://app.shopapi.xiaomi.com/v1/authorize/sso?client_id=',
+        logout_path: 'http://app.shopapi.xiaomi.com/v1/authorize/sso_logout?client_id=',
+        ajax_error_url: [
+            'user/show'
+        ],
         need_modify_cart: [
-            '/shopping/addcart',
-            '/shopping/delcart',
-            '/shopping/editconsumption',
-            '/order/submit'
+            'shopping/addcart',
+            'shopping/delcart',
+            'shopping/editconsumption',
+            'order/submit'
         ],
         request: function(options, callback){
             /*
@@ -41,8 +45,12 @@ define([
                     if(res.result == 'ok'){
                         callback(res, setting.that);
                     }else if(res.result == 'error'){
-                        // 需要登录验证
-                        if(!!res.reason && /access_token/.test(res.reason)){
+                        if(_.indexOf(self.ajax_error_url, setting.url) !== -1){
+                            callback(res, setting.that);
+                            return false;
+                        }
+                        // 接口需要预先登录
+                        if(!!res.reason && /access_token/.test(res.reason) && false){
                             self.doLogin();
                             return false;
                         }
@@ -65,6 +73,9 @@ define([
         },
         doLogin: function(){
             location.href = this.sso_path+this.client_id+'&callback='+encodeURIComponent(location.href);
+        },
+        doLogout: function(){
+            location.href = this.logout_path+this.client_id+'&callback='+encodeURIComponent(location.origin);
         },
         showLoad: function(){
             $('#maskLoad').removeClass('hide');
