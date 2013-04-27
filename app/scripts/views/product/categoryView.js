@@ -17,7 +17,10 @@ define([
         },
         render: function(){
             this.process(function(self){
-                console.dir(self.options.res);
+                var data, compileTemplate;
+                data = self.options.res;
+                compileTemplate = $.tmpl(CategoryTemplate, data);
+                self.$el.html(compileTemplate);
             });
         },
         process: function(callback){
