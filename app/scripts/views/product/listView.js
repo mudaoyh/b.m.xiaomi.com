@@ -6,8 +6,9 @@ define([
     'underscore',
     'backbone',
     'libs/mipu',
+    'libs/util',
     'text!templates/product/listTemplate.html'
-], function($, _, Backbone, Mipu, ListTemplate){
+], function($, _, Backbone, Mipu, Util, ListTemplate){
 
     var ListView = Backbone.View.extend({
         el: $('#viewbody'),
@@ -24,6 +25,7 @@ define([
                 data = res.data;
                 compileTemplate = $.tmpl(ListTemplate, data);
                 self.$el.html(compileTemplate);
+                debugger;
             });
         }
     });

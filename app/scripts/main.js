@@ -4,6 +4,7 @@
 * */
 
 require.config({
+    baseUrl: '/scripts',
     paths: {
         jquery: 'vendor/jquery/jquery',
         tmpl: 'vendor/jquery-tmpl/jquery.tmpl',
@@ -13,8 +14,10 @@ require.config({
     }
 });
 
-require(['views/app'], function(App){
+require(['libs/util', 'views/app'], function(Util, App){
     console.log('载入main.js入口文件 和 views/app.js的初始化文件');
+    var root = this;
+    root._isApp = Util.isApp();
     App.init();
 });
 
