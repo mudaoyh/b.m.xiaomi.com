@@ -13,10 +13,16 @@ define([
 
     var ListView = Backbone.View.extend({
         el: $('#viewbody'),
+        initialize: function(){
+            console.log('ListTemplate载入render列表模板');
+        },
         render: function(cate_id){
-            this.getData(cate_id, function(res, self){
+            this.process(function(self){
                 debugger;
             });
+//            this.getData(cate_id, function(res, self){
+//                debugger;
+//            });
 //            var options = {
 //                url: '/product/list',
 //                param: {
@@ -31,6 +37,11 @@ define([
 //                self.$el.html(compileTemplate);
 //                debugger;
 //            });
+        },
+
+
+        process: function(callback){
+            callback(this);
         },
         getData: function(cate_id, callback){
             var options = {

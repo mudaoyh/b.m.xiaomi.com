@@ -35,7 +35,7 @@ define([
                 }, function(res, self){
                     var data = JSON.stringify(res.data);
                     Util.SessionCache.set( self.options.cacheName, data );
-                    self.options.res = data;
+                    self.options.res = res.data;
                     callback(self);
                 });
             }
