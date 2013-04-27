@@ -13,7 +13,7 @@ define([
         console.log('app.js 执行init方法');
         var appRouter = new Router();
 
-        if(!Util.isApp()){
+        if( !_isApp ){
             HeaderView.render();
             FooterView.render();
         }

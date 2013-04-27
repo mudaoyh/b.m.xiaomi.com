@@ -1,0 +1,21 @@
+{{each(index, value) product}}
+<li>
+    <div class="product items {{if is_cos}}is_cos{{else price != market_price}}is_discount{{/if}}">
+        <a href="javascript:;" class="ScanProductViewBtn" product_id="${product_id}">
+            <div class="imgurl"><img src="${image_url[180]}"></div>
+            <div class="info">
+                <p class="name">${product_name}</p>
+                <div class="price_info">
+                    {{if price != market_price}}
+                    <del class="market_price">&yen;${market_price}</del>
+                    {{/if}}
+                    <span class="price">&yen;${price}</span>
+                    {{if is_cos}}
+                    <span class="cos">暂时缺货</span>
+                    {{/if}}
+                </div>
+            </div>
+        </a>
+    </div>
+</li>
+{{/each}}

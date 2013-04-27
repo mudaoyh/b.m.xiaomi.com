@@ -16,20 +16,31 @@ define([
             console.log('CategoryTemplate载入render列表模板');
         },
         render: function(){
-            var options = {
-                url: '/product/category',
-                that: this
-            };
-            Mipu.request(options, function(res, self){
-                var data, compileTemplate;
-                data = {
-                    'categroies': res.data.categroies
-                };
-                compileTemplate = $.tmpl(CategoryTemplate, data);
-                self.$el.html(compileTemplate);
+            this.process(function(self){
+                console.dir(self.options.res);
             });
+        },
+        process: function(callback){
+            if( Util.SessionCache.has(this.options.cacheName) ){
+                var data = JSON.parse( Util.SessionCache.get( this.options.cacheName ) );
+                this.options.res = data;
+                callback(this);
+            }else{
+                Mipu.request({
+                    url: '/product/category',
+                    that: this
+                }, function(res, self){
+                    var data = JSON.stringify(res.data);
+                    Util.SessionCache.set( self.options.cacheName, data );
+                    self.options.res = data;
+                    callback(self);
+                });
+            }
         }
     });
 
-    return new CategoryView;
+    var options = {
+        cacheName: 'local_category'
+    };
+    return new CategoryView(options);
 });

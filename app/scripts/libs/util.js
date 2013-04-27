@@ -28,6 +28,20 @@ define([
                 localStorage.clear();
             }
         },
+        SessionCache: {
+            set: function(key, value){
+                sessionStorage.setItem(key, value);
+            },
+            get: function(key){
+                return sessionStorage.getItem(key);
+            },
+            has: function(key){
+                if( !sessionStorage.getItem(key) ){
+                    return false;
+                }
+                return true;
+            }
+        },
         Cookie: {
             setCookie: function(sName, sValue, oExpires, sPath, sDomain, bSecure) {
                 var sCookie = sName + "=" + encodeURIComponent(sValue);
