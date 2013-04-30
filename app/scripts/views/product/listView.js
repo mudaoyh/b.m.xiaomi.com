@@ -18,7 +18,7 @@ define([
         },
         render: function(cate_id){
             this.process(function(self){
-                debugger;
+//                debugger;
             });
 //            this.getData(cate_id, function(res, self){
 //                debugger;

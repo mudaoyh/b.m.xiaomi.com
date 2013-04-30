@@ -6,14 +6,6 @@ define([
     'underscore'
 ], function($, _){
     return {
-        isApp: function(){
-            try{
-                if(!!WE){
-                    return true;
-                }
-            }catch(e){}
-            return false;
-        },
         Cache: {
             set: function(key, value){
                 localStorage.setItem(key, value);
@@ -94,6 +86,32 @@ define([
                     return false;
                 } else {
                     return true;
+                }
+            }
+        },
+        isApp: function(){
+            try{
+                if(!!WE){
+                    return true;
+                }
+            }catch(e){}
+            return false;
+        },
+        AppTrigger: {
+            WebEventTrigger: function(name, data){
+                try{
+                    if( WE && WE.trigger ){
+                        if( typeof (data) !== 'string' ){
+                            data = JSON.stringify(data);
+                        }
+                        return WE.trigger(name, data);
+                    }
+                }catch (e){}
+                return false;
+            },
+            Trigger: function(name, data, callback, that){
+                if( !this.WebEventTrigger(name, data) ){
+                    callback(data, that);
                 }
             }
         }
