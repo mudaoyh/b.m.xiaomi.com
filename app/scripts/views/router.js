@@ -67,14 +67,17 @@ define([
             console.error('showProductView: '+product_id);
         },
         showDefault: function(actions){
-            var self = this;
-            Mipu.activityControl(actions, self, function(isActivity, res, that){
+            Mipu.activityControl(actions, function(isActivity, res, self){
                 if(isActivity){
-                    that.nav('/home/'+res.activity_type);
+                    if(res.activity_type == 'other'){
+                        location.replace(res.activity_url);
+                    }else{
+                        self.nav('/home/'+res.activity_type);
+                    }
                     return;
                 }
                 console.error('404: '+actions);
-            });
+            }, this);
         },
         nav: function(hash){
             this.navigate(hash, {trigger: true})
