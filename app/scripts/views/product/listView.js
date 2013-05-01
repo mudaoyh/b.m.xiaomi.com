@@ -18,7 +18,7 @@ define([
             console.log('ListTemplate载入render列表模板');
             this.options = {
                 'adaptType': ['MI1', 'MI1S', 'MI2', 'BOX', 'MI2S', 'MI2A'],
-                'adaptItems': {MI1:'1',MI1S:'1S',MI2:'2',BOX:'盒子',MI2S:'2S',MI2A:'2A'}
+                'adaptItems': {'MI1':'1','MI1S':'1S','MI2':'2','BOX':'盒子','MI2S':'2S','MI2A':'2A'}
             };
         },
         events: {
