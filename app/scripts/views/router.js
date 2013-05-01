@@ -5,19 +5,25 @@ define([
     'underscore',
     'backbone',
     'libs/mipu',
+    'views/layout/headerView',
+    'views/layout/footerView',
     'views/home/indexView',
     'views/home/yuyueView',
     'views/product/categoryView',
     'views/product/listView',
+    'views/product/productView',
     'views/account/indexView'
 ], function(
     _,
     Backbone,
     Mipu,
+    HeaderView,
+    FooterView,
     IndexView,
     YuyueView,
     CategoryView,
     ListView,
+    ProductView,
     AccountView
     ){
 
@@ -35,7 +41,10 @@ define([
             '*actions': 'showDefault'
         },
         initialize: function(){
-            Backbone.history.start();
+            if( !_isApp ){
+                HeaderView.render();
+                FooterView.render();
+            }
         },
         showAccount: function(){
             console.log('showAccount');
@@ -70,6 +79,11 @@ define([
         },
         showProductView: function(product_id){
             console.log('showProductView: '+product_id);
+            if(product_id == 1731){
+                debugger;
+            }else{
+                ProductView.render(product_id);
+            }
         },
         showDefault: function(actions){
             Mipu.activityControl(actions, function(isActivity, res, self){
