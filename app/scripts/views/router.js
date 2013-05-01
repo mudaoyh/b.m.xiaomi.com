@@ -38,33 +38,38 @@ define([
             Backbone.history.start();
         },
         showAccount: function(){
-            console.error('showAccount');
+            console.log('showAccount');
             AccountView.render();
         },
         showShopping: function(){
-            console.error('showShopping');
+            console.log('showShopping');
         },
         showIndex: function(){
-            console.error('showIndex');
+            console.log('showIndex');
             IndexView.render();
         },
         showYuyue: function(){
-            console.error('showYuyue');
+            console.log('showYuyue');
             YuyueView.render();
         },
         showQianggou: function(){
-            console.error('showQiangGou');
+            console.log('showQiangGou');
         },
         showProductCategory: function(){
-            console.error('showProductCategory');
+            console.log('showProductCategory');
             CategoryView.render();
         },
         showProductList: function(cate_id, adapt){
-            console.error('showProductList cate_id: '+cate_id+ 'adapt: ' +adapt);
-            ListView.render(cate_id);
+            console.log('showProductList cate_id: '+cate_id+ 'adapt: ' +adapt);
+            if(cate_id == -1){
+                ListView.showPhoneList();
+            }else{
+                ListView.set(cate_id, adapt);
+                ListView.render();
+            }
         },
         showProductView: function(product_id){
-            console.error('showProductView: '+product_id);
+            console.log('showProductView: '+product_id);
         },
         showDefault: function(actions){
             Mipu.activityControl(actions, function(isActivity, res, self){

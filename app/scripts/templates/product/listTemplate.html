@@ -10,7 +10,7 @@
 </div>
 <div class="product_product mt-20">
     <div class="list_product list_column list_tmp">
-        {{if total_count>0}}
+        {{if total_count > 0}}
         <ul id="ProductList">
             {{each(index, value) product}}
             <li>
@@ -55,6 +55,6 @@
         </div>
     </div>
 </div>
-{{if total_pages>1}}
+{{if current_page !== total_pages && total_count > 0}}
 <div class="mlr20"><a id="PorductListMoreBtn" class="more_button mb20" href="javascript:;" loadingtxt="加载中..." showtxt="加载更多">加载更多</a></div>
 {{/if}}

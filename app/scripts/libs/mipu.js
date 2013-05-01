@@ -54,6 +54,7 @@ define([
                             self.doLogin();
                             return false;
                         }
+                        self.popup('mipu.request: '+res.description);
                     }
                     if(_.indexOf(self.need_modify_cart, setting.url) !== -1){
                         console.log('更新购物车数量');

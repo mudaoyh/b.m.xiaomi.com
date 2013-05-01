@@ -14,6 +14,9 @@ define([
         el: $('#viewbody'),
         initialize: function(){
             console.log('CategoryTemplate载入render列表模板');
+            this.options = {
+                'cacheName': 'local_category'
+            }
         },
         render: function(){
             this.process(function(self){
@@ -42,8 +45,5 @@ define([
         }
     });
 
-    var options = {
-        cacheName: 'local_category'
-    };
-    return new CategoryView(options);
+    return new CategoryView();
 });
