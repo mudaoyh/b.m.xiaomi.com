@@ -91,15 +91,15 @@ define([
                 popup.fadeOut('slow');
             }, 2500)
         },
-        activityControl: function(actions, callback, that){
+        activityControl: function(actions, callback, self){
             var options;
             options = {
                 url: '/activity/control',
                 that: self
             };
             if(!actions){
-                this.request(options, function(res, that){
-                    callback(true, res.data, that);
+                this.request(options, function(res, self){
+                    callback(true, res.data, self);
                 });
             }else{
                 callback(false);
