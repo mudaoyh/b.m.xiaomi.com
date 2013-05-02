@@ -22,6 +22,8 @@ define([
         },
         render: function(product_id){
             this.options.product_id = product_id;
+            this.options.cacheName = 'product_view_'+product_id;
+
             this.process(function(self){
                 var compileTemplate = $.tmpl(ProductViewTemplate, self.options.res);
                 self.$el.html(compileTemplate);
@@ -32,32 +34,39 @@ define([
             });
         },
         process: function(callback){
-            var options = {
-                url: '/product/view',
-                param: {
-                    'product_id': this.options.product_id
-                },
-                that: this
-            };
-            Mipu.request(options, function(res, self){
-                var product, selectConsumptionArray, i, k, stylelist;
+            if(Util.SessionCache.has( this.options.cacheName )){
+                var data = JSON.parse(Util.SessionCache.get(this.options.cacheName));
+                this.options.res = data;
+                callback(this);
+            }else{
+                var options = {
+                    url: '/product/view',
+                    param: {
+                        'product_id': this.options.product_id
+                    },
+                    that: this
+                };
+                Mipu.request(options, function(res, self){
+                    var product, selectConsumptionArray, i, k, stylelist;
 
-                product = res.data.result;
-                selectConsumptionArray = [];
+                    product = res.data.result;
+                    selectConsumptionArray = [];
 
-                for(i = 1,k=parseInt(product.buy_limit); i<=k; i+=1){
-                    selectConsumptionArray.push(i);
-                }
-                // 购买限制 buy_limit
-                product.selectConsumptionArray = selectConsumptionArray;
+                    for(i = 1,k=parseInt(product.buy_limit); i<=k; i+=1){
+                        selectConsumptionArray.push(i);
+                    }
+                    // 购买限制 buy_limit
+                    product.selectConsumptionArray = selectConsumptionArray;
 
-                product.stylelength = 0;
-                for(stylelist in product.style){
-                    product.stylelength += 1;
-                }
-                self.options.res = product;
-                callback(self);
-            });
+                    product.stylelength = 0;
+                    for(stylelist in product.style){
+                        product.stylelength += 1;
+                    }
+                    self.options.res = product;
+                    Util.SessionCache.set(self.options.cacheName, JSON.stringify(product));
+                    callback(self);
+                });
+            }
         },
         loadMore: function(e){
             var selfEle = e.currentTarget;
