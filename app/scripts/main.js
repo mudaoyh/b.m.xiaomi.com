@@ -8,6 +8,7 @@ require.config({
     paths: {
         jquery: 'vendor/jquery/jquery',
         tmpl: 'vendor/jquery-tmpl/jquery.tmpl',
+        lazyload: 'vendor/jquery.lazyload/jquery.lazyload',
         underscore: 'vendor/underscore-amd/underscore',
         backbone: 'vendor/backbone-amd/backbone',
         templates: 'templates'

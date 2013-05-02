@@ -104,6 +104,25 @@ define([
             }else{
                 callback(false);
             }
+        },
+        formUi: {
+            setSelect: {
+                init: function(){
+                    $('.option').each(function(){
+                        var selected = $(this).parent().find('select:selected'),
+                            first_child = $(this).parent().find('select option').eq(0);
+                        if(selected.length > 0){
+                            $(this).text(selected.text());
+                        }else{
+                            $(this).text(first_child.text());
+                        }
+                    });
+                },
+                changeSelect: function(that){
+                    var str = $(that).find('option:selected').text();
+                    $(that).parent().find('.option').text(str);
+                }
+            }
         }
     };
 });
