@@ -98,6 +98,20 @@
         </div>
         <div class="product_pick">
             <div class="h_box">
+                {{if stylelength != 0}}
+                {{each(stylename, stylevalue) style}}
+                <div class="flex_1">
+                    <div data-type="select" class="select">
+                        <div data-value="01" class="option"></div>
+                        <select class="xm-select-style">
+                            {{each(index, value) stylevalue}}
+                            <option {{if product_id == value}}selected="selected"{{/if}} value="${value}">${index}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                {{/each}}
+                {{/if}}
                 <div class="flex_1">
                     <div data-type="select" class="select">
                         <div data-value="01" class="option"></div>

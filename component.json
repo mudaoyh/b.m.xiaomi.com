@@ -6,6 +6,7 @@
         "jquery": null,
         "jquery-tmpl": null,
         "backbone-amd": null,
-        "underscore-amd": null
+        "underscore-amd": null,
+        "jquery.lazyload": null
     }
 }
