@@ -14,10 +14,10 @@ define([
             'user/show'
         ],
         need_modify_cart: [
-            'shopping/addcart',
-            'shopping/delcart',
-            'shopping/editconsumption',
-            'order/submit'
+            '/shopping/addcart',
+            '/shopping/delcart',
+            '/shopping/editconsumption',
+            '/order/submit'
         ],
         request: function(options, callback){
             /*
@@ -25,6 +25,7 @@ define([
             * param: 参数
             * version: api版本
             * that: 指针
+            * loading: 正在加载遮罩
             * */
 
             var defaults, setting, self;
@@ -33,7 +34,8 @@ define([
                     'client_id': this.client_id
                 },
                 version: 'v1',
-                that: this
+                that: this,
+                loading: true
             };
             setting = $.extend(true, defaults, options);
             self = this;
@@ -50,22 +52,24 @@ define([
                             return false;
                         }
                         // 接口需要预先登录
-                        if(!!res.reason && /access_token/.test(res.reason) && false){
+                        if(!!res.reason && /access_token/.test(res.reason)){
                             self.doLogin();
                             return false;
                         }
-                        self.popup('mipu.request: '+res.description);
+                        self.popup(res.description);
                     }
                     if(_.indexOf(self.need_modify_cart, setting.url) !== -1){
-                        console.log('更新购物车数量');
-                        debugger;
+                        console.error('需要更新购物车数量');
+                        // Todo
                     }
                 },
                 error: function(){
                     console.error('ajax 出错');
                 },
                 beforeSend: function(){
-                    self.showLoad();
+                    if(setting.loading){
+                        self.showLoad();
+                    }
                 },
                 complete: function(){
                     self.hideLoad();

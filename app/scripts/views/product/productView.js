@@ -7,15 +7,17 @@ define([
     'backbone',
     'libs/mipu',
     'libs/util',
+    'libs/shopping',
     'text!templates/product/productViewTemplate.html',
     'lazyload'
-], function($, _, Backbone, Mipu, Util, ProductViewTemplate){
+], function($, _, Backbone, Mipu, Util, Shopping, ProductViewTemplate){
     var ProductView = Backbone.View.extend({
         el: $('#viewbody'),
         events: {
             'click #LoadmoreImagesBtn': 'loadMore',
             'change select': 'selectChange',
-            'change .xm-select-style': 'selectProduct'
+            'change .xm-select-style': 'selectProduct',
+            'click [action="AddShoppingCartBtn"]': 'addCart'
         },
         initialize: function(){
             console.log('productView render');
@@ -85,6 +87,14 @@ define([
         selectProduct: function(e){
             var product_id = $(e.currentTarget).find('option:selected').val();
             location.replace('#/product/view/'+product_id);
+        },
+        addCart: function(e){
+            var product_id, consumption;
+            product_id = this.options.product_id;
+            consumption = $('#xm-select-product-addcart').find('option:selected').val();
+            Shopping.addCart(product_id, consumption, function(res, self){
+                Mipu.popup('成功加入购物车');
+            }, this);
         }
     });
     return new ProductView;
