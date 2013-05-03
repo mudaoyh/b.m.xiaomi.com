@@ -43,7 +43,7 @@ define([
                 callback(this);
             }else{
                 var options = {
-                    url: '/product/list',
+                    url: 'product/list',
                     param: {
                         'cateid': this.options.cate_id,
                         'pageindex': this.options.pageindex,

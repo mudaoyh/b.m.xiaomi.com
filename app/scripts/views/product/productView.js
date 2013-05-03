@@ -17,7 +17,8 @@ define([
             'click #LoadmoreImagesBtn': 'loadMore',
             'change select': 'selectChange',
             'change .xm-select-style': 'selectProduct',
-            'click [action="AddShoppingCartBtn"]': 'addCart'
+            'click [action="AddShoppingCartBtn"]': 'addCart',
+            'click [action="NextShoppingCartBtn"]': 'navStyleList'
         },
         initialize: function(){
             console.log('productView render');
@@ -42,7 +43,7 @@ define([
                 callback(this);
             }else{
                 var options = {
-                    url: '/product/view',
+                    url: 'product/view',
                     param: {
                         'product_id': this.options.product_id
                     },
@@ -95,6 +96,12 @@ define([
             Shopping.addCart(product_id, consumption, function(res, self){
                 Mipu.popup('成功加入购物车');
             }, this);
+        },
+        navStyleList: function(e){
+            var product_id, consumption;
+            product_id = this.options.product_id;
+            consumption = $('#xm-select-product-addcart').find('option:selected').val();
+            location.href = '#/shopping/stylelist/'+product_id+'/'+consumption;
         }
     });
     return new ProductView;

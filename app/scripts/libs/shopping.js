@@ -6,7 +6,7 @@ define(['libs/mipu'], function(Mipu){
     var Shopping = {
         addCart: function(product_id, consumption, callback, that){
             var options = {
-                url: '/shopping/addCart',
+                url: 'shopping/addCart',
                 param: {
                     'product_id': product_id,
                     'consumption': consumption

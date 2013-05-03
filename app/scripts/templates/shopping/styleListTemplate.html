@@ -1,0 +1,19 @@
+{{if !_isApp }}
+<div id="crumbs" class="crumbs">
+    <ul>
+        <li><a href="#/home/index1"><span>首页</span></a></li>
+        <li><a href="#/product/category">分类浏览</a></li>
+        <li><a href="#/product/view/${product_id}">商品详情</a></li>
+        <li><a href="javascript:;">套餐选择</a></li>
+    </ul>
+</div>
+{{/if}}
+{{if _isApp }}
+<div id="toolbar_app" class="header_02 mb20">
+    <a href="javascrpit:;" class="back" onclick="history.back();return false;">
+        <img src="http://p.www.xiaomi.com/m/reserve/mi2/130322/images/arrow_left.png">
+    </a>
+    <h3><span>套装详情</span></h3>
+</div>
+{{/if}}
+

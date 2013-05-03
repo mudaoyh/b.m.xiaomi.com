@@ -14,10 +14,10 @@ define([
             'user/show'
         ],
         need_modify_cart: [
-            '/shopping/addcart',
-            '/shopping/delcart',
-            '/shopping/editconsumption',
-            '/order/submit'
+            'shopping/addcart',
+            'shopping/delcart',
+            'shopping/editconsumption',
+            'order/submit'
         ],
         request: function(options, callback){
             /*
@@ -98,7 +98,7 @@ define([
         activityControl: function(actions, callback, self){
             var options;
             options = {
-                url: '/activity/control',
+                url: 'activity/control',
                 that: self
             };
             if(!actions){

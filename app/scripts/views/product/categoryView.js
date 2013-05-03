@@ -33,7 +33,7 @@ define([
                 callback(this);
             }else{
                 Mipu.request({
-                    url: '/product/category',
+                    url: 'product/category',
                     that: this
                 }, function(res, self){
                     var data = JSON.stringify(res.data);

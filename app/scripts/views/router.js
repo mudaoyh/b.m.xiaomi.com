@@ -12,7 +12,8 @@ define([
     'views/product/categoryView',
     'views/product/listView',
     'views/product/productView',
-    'views/account/indexView'
+    'views/account/indexView',
+    'views/shopping/styleListView'
 ], function(
     _,
     Backbone,
@@ -24,7 +25,8 @@ define([
     CategoryView,
     ListView,
     ProductView,
-    AccountView
+    AccountView,
+    StyleListView
     ){
 
     var AppRouter = Backbone.Router.extend({
@@ -38,6 +40,7 @@ define([
             'product/list/:cate_id': 'showProductList',
             'product/list/:cate_id/:adapt': 'showProductList',
             'product/view/:product_id': 'showProductView',
+            'shopping/stylelist/:product_id/:consumption': 'showShoppingStyleList',
             '*actions': 'showDefault'
         },
         initialize: function(){
@@ -84,6 +87,10 @@ define([
             }else{
                 ProductView.render(product_id);
             }
+        },
+        showShoppingStyleList: function(product_id, consumption){
+            console.log('showProductStyleList');
+            StyleListView.render(product_id, consumption);
         },
         showDefault: function(actions){
             Mipu.activityControl(actions, function(isActivity, res, self){

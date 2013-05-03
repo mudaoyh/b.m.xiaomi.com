@@ -16,7 +16,7 @@ define([
         },
         render: function(){
             var options = {
-                url: '/home/index',
+                url: 'home/index',
                 version: 'v2',
                 that: this
             };
