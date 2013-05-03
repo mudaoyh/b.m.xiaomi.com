@@ -1,60 +1,62 @@
-<div id="crumbs" class="crumbs">
-    <div class="adapt_btn">
-        <a id="adapt_button" href="javascript:;">筛选</a>
-    </div>
-    <ul>
-        <li><a href="#/home/index1"><span>首页</span></a></li>
-        <li><a href="#/product/category">分类浏览</a></li>
-        <li><a href="javascript:;">${cate_name}</a></li>
-    </ul>
-</div>
-<div class="product_product mt-20">
-    <div class="list_product list_column list_tmp">
-        {{if total_count > 0}}
-        <ul id="ProductList">
-            {{each(index, value) product}}
-            <li>
-                <div class="product items {{if is_cos}}is_cos{{else price != market_price}}is_discount{{/if}}">
-                    <a href="#/product/view/${product_id}" class="ScanProductViewBtn" product_id="${product_id}">
-                        <div class="imgurl"><img src="${image_url[180]}"></div>
-                        <div class="info">
-                            <p class="name">${product_name}</p>
-                            <div class="price_info">
-                                {{if price != market_price}}
-                                <del class="market_price">&yen;${market_price}</del>
-                                {{/if}}
-                                <span class="price">&yen;${price}</span>
-                                {{if is_cos}}
-                                <span class="cos">暂时缺货</span>
-                                {{/if}}
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </li>
-            {{/each}}
+<div id="list_template">
+    <div id="crumbs" class="crumbs">
+        <div class="adapt_btn">
+            <a id="adapt_button" href="javascript:;">筛选</a>
+        </div>
+        <ul>
+            <li><a href="#/home/index1"><span>首页</span></a></li>
+            <li><a href="#/product/category">分类浏览</a></li>
+            <li><a href="javascript:;">${cate_name}</a></li>
         </ul>
-        {{else}}
-        <div class="tips_view mitu_02">
-            <div class="tips_msg">
-                <h3>暂没有与您筛选相符的产品<br/>请试试其它分类</h3>
+    </div>
+    <div class="product_product mt-20">
+        <div class="list_product list_column list_tmp">
+            {{if total_count > 0}}
+            <ul id="ProductList">
+                {{each(index, value) product}}
+                <li>
+                    <div class="product items {{if is_cos}}is_cos{{else price != market_price}}is_discount{{/if}}">
+                        <a href="#/product/view/${product_id}" class="ScanProductViewBtn" product_id="${product_id}">
+                            <div class="imgurl"><img src="${image_url[180]}"></div>
+                            <div class="info">
+                                <p class="name">${product_name}</p>
+                                <div class="price_info">
+                                    {{if price != market_price}}
+                                    <del class="market_price">&yen;${market_price}</del>
+                                    {{/if}}
+                                    <span class="price">&yen;${price}</span>
+                                    {{if is_cos}}
+                                    <span class="cos">暂时缺货</span>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+            {{else}}
+            <div class="tips_view mitu_02">
+                <div class="tips_msg">
+                    <h3>暂没有与您筛选相符的产品<br/>请试试其它分类</h3>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+        <div id="adapt_panel" class="overlay_adapt_panel">
+            <div id="pick_panel" class="pick_panel">
+                <dl>
+                    <dt><a href="javascript:;" data-adapt="" data-txt="筛选">全部机型</a></dt>
+                    <dd class="xm_2s"><a href="javascript:;" data-adapt="MI2S" data-txt="2">小米手机2S</a></dd>
+                    <dd class="xm_2"><a href="javascript:;" data-adapt="MI2" data-txt="2">小米手机2</a></dd>
+                    <dd class="xm_1s"><a href="javascript:;" data-adapt="MI1S" data-txt="1S">小米手机1S</a></dd>
+                    <dd class="xm_1"><a href="javascript:;" data-adapt="MI1" data-txt="1">小米手机1</a></dd>
+                    <dd class="xm_box"><a href="javascript:;" data-adapt="BOX" data-txt="1">小米盒子</a></dd>
+                </dl>
             </div>
         </div>
-        {{/if}}
     </div>
-    <div id="adapt_panel" class="overlay_adapt_panel">
-        <div id="pick_panel" class="pick_panel">
-            <dl>
-                <dt><a href="javascript:;" data-adapt="" data-txt="筛选">全部机型</a></dt>
-                <dd class="xm_2s"><a href="javascript:;" data-adapt="MI2S" data-txt="2">小米手机2S</a></dd>
-                <dd class="xm_2"><a href="javascript:;" data-adapt="MI2" data-txt="2">小米手机2</a></dd>
-                <dd class="xm_1s"><a href="javascript:;" data-adapt="MI1S" data-txt="1S">小米手机1S</a></dd>
-                <dd class="xm_1"><a href="javascript:;" data-adapt="MI1" data-txt="1">小米手机1</a></dd>
-                <dd class="xm_box"><a href="javascript:;" data-adapt="BOX" data-txt="1">小米盒子</a></dd>
-            </dl>
-        </div>
-    </div>
+    {{if current_page !== total_pages && total_count > 0}}
+    <div class="mlr20"><a id="PorductListMoreBtn" class="more_button mb20" href="javascript:;" loadingtxt="加载中..." showtxt="加载更多">加载更多</a></div>
+    {{/if}}
 </div>
-{{if current_page !== total_pages && total_count > 0}}
-<div class="mlr20"><a id="PorductListMoreBtn" class="more_button mb20" href="javascript:;" loadingtxt="加载中..." showtxt="加载更多">加载更多</a></div>
-{{/if}}

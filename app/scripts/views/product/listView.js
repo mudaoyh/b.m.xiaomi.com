@@ -22,9 +22,9 @@ define([
             };
         },
         events: {
-            'click #PorductListMoreBtn': 'more',
-            'click #adapt_button': 'adaptPanel',
-            'click #pick_panel a': 'adaptInit'
+            'click #list_template #PorductListMoreBtn': 'more',
+            'click #list_template #adapt_button': 'adaptPanel',
+            'click #list_template #pick_panel a': 'adaptInit'
         },
         set: function(cate_id, adapt, page_index){
             var adapt = !adapt ? '' : adapt,

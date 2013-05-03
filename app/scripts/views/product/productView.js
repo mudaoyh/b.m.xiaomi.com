@@ -14,11 +14,11 @@ define([
     var ProductView = Backbone.View.extend({
         el: $('#viewbody'),
         events: {
-            'click #LoadmoreImagesBtn': 'loadMore',
-            'change select': 'selectChange',
-            'change .xm-select-style': 'selectProduct',
-            'click [action="AddShoppingCartBtn"]': 'addCart',
-            'click [action="NextShoppingCartBtn"]': 'navStyleList'
+            'click #product_view_template #LoadmoreImagesBtn': 'loadMore',
+            'change #product_view_template select': 'selectChange',
+            'change #product_view_template .xm-select-style': 'selectProduct',
+            'click #product_view_template #AddShoppingCartBtn': 'addCart',
+            'click #product_view_template #NextShoppingCartBtn': 'navStyleList'
         },
         initialize: function(){
             console.log('productView render');
@@ -84,6 +84,7 @@ define([
             var selfEle = e.currentTarget;
             // formSelect 选择当前项
             Mipu.formUi.setSelect.changeSelect(selfEle);
+
         },
         selectProduct: function(e){
             var product_id = $(e.currentTarget).find('option:selected').val();

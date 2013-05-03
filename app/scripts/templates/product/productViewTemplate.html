@@ -1,139 +1,141 @@
-<div id="crumbs" class="crumbs">
-    <ul>
-        <li><a href="#/home/index1"><span>首页</span></a></li>
-        <li><a href="#/product/category">分类浏览</a></li>
-        <li><a href="javascript:;">商品详情</a></li>
-    </ul>
-</div>
-<div class="product_view">
-    <div class="box box_01">
-        <div class="product_info">
-            <div class="info">
-                <h3 class="name">${product_name}</h3>
-            </div>
-            {{if !!adapt}}
-            <div class="adapt">
-                <p><span>适配机型：</span>
-                    {{each(index, value) adapt}}
-                    {{if value == '小米手机2S'}}
-                    <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_16.png' alt="小米手机2S">
-                    {{else value == '小米手机2A'}}
-                    <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_32.png' alt="小米手机2A">
-                    {{else value == '小米手机2'}}
-                    <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_4.png' alt="小米手机2">
-                    {{else value == '小米手机1S'}}
-                    <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_2.png' alt="小米手机1S">
-                    {{else value == '小米手机1'}}
-                    <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_1.png' alt="小米手机1">
-                    {{else value == '小米盒子'}}
-                    <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_8.png' alt="小米盒子">
-                    {{/if}}
-                    {{/each}}
-                </p>
-            </div>
-            {{/if}}
-            <div class="price">&yen; ${price}
-                {{if price < market_price}}
-                <del class="market_price">&yen; ${market_price}</del>
-                {{/if}}
-            </div>
-        </div>
-        <div class="product_main">
-            <!-- 单品介绍图片-->
-            <div class="product_desc_img product_desc">
-                <ul>
-                    {{each(index, value) product_desc_img}}
-                    {{if index <= 2}}
-                    <li><div class="imgurl"><img width="100%" height="auto" data-original="${value}"/></div></li>
-                    {{else}}
-                    <li class="hide"><div class="imgurl"><img width="100%" height="auto" data-original="${value}"/></div></li>
-                    {{/if}}
-                    {{/each}}
-                </ul>
-            </div>
-            <!-- 产品图片默认隐藏-->
-            <div class="product_images product_desc" id="ProductImages">
-                <ul>
-                    {{each(index, value) images}}
-                    <li class="hide">
-                        <div class="imgurl"><img data-original="${value[470]}"></div>
-                    </li>
-                    {{/each}}
-                </ul>
-            </div>
-        </div>
-        <div class="desc_more"><a href="javascript:;" class="desc_more_button" id="LoadmoreImagesBtn">查看更多</a></div>
+<div id="product_view_template">
+    <div id="crumbs" class="crumbs">
+        <ul>
+            <li><a href="#/home/index1"><span>首页</span></a></li>
+            <li><a href="#/product/category">分类浏览</a></li>
+            <li><a href="javascript:;">商品详情</a></li>
+        </ul>
     </div>
-    <div class="box box_02">
-        <div class="product_info">
-            <div class="info">
-                <h3 class="name">${product_name}</h3>
-            </div>
-            {{if !!adapt}}
-            <div class="adapt">
-                <p><span>适配机型：</span>
-                    {{each(index, value) adapt}}
-                    {{if value == '小米手机2S'}}
-                    <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_16.png' alt="小米手机2s">
-                    {{else value == '小米手机2A'}}
-                    <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_32.png' alt="小米手机2A">
-                    {{else value == '小米手机2'}}
-                    <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_4.png' alt="小米手机2">
-                    {{else value == '小米手机1S'}}
-                    <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_2.png' alt="小米手机1S">
-                    {{else value == '小米手机1'}}
-                    <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_1.png' alt="小米手机1">
-                    {{else value == '小米盒子'}}
-                    <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_8.png' alt="小米盒子">
+    <div class="product_view">
+        <div class="box box_01">
+            <div class="product_info">
+                <div class="info">
+                    <h3 class="name">${product_name}</h3>
+                </div>
+                {{if !!adapt}}
+                <div class="adapt">
+                    <p><span>适配机型：</span>
+                        {{each(index, value) adapt}}
+                        {{if value == '小米手机2S'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_16.png' alt="小米手机2S">
+                        {{else value == '小米手机2A'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_32.png' alt="小米手机2A">
+                        {{else value == '小米手机2'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_4.png' alt="小米手机2">
+                        {{else value == '小米手机1S'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_2.png' alt="小米手机1S">
+                        {{else value == '小米手机1'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_1.png' alt="小米手机1">
+                        {{else value == '小米盒子'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_8.png' alt="小米盒子">
+                        {{/if}}
+                        {{/each}}
+                    </p>
+                </div>
+                {{/if}}
+                <div class="price">&yen; ${price}
+                    {{if price < market_price}}
+                    <del class="market_price">&yen; ${market_price}</del>
                     {{/if}}
+                </div>
+            </div>
+            <div class="product_main">
+                <!-- 单品介绍图片-->
+                <div class="product_desc_img product_desc">
+                    <ul>
+                        {{each(index, value) product_desc_img}}
+                        {{if index <= 2}}
+                        <li><div class="imgurl"><img width="100%" height="auto" data-original="${value}"/></div></li>
+                        {{else}}
+                        <li class="hide"><div class="imgurl"><img width="100%" height="auto" data-original="${value}"/></div></li>
+                        {{/if}}
+                        {{/each}}
+                    </ul>
+                </div>
+                <!-- 产品图片默认隐藏-->
+                <div class="product_images product_desc" id="ProductImages">
+                    <ul>
+                        {{each(index, value) images}}
+                        <li class="hide">
+                            <div class="imgurl"><img data-original="${value[470]}"></div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+            <div class="desc_more"><a href="javascript:;" class="desc_more_button" id="LoadmoreImagesBtn">查看更多</a></div>
+        </div>
+        <div class="box box_02">
+            <div class="product_info">
+                <div class="info">
+                    <h3 class="name">${product_name}</h3>
+                </div>
+                {{if !!adapt}}
+                <div class="adapt">
+                    <p><span>适配机型：</span>
+                        {{each(index, value) adapt}}
+                        {{if value == '小米手机2S'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_16.png' alt="小米手机2s">
+                        {{else value == '小米手机2A'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_32.png' alt="小米手机2A">
+                        {{else value == '小米手机2'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_4.png' alt="小米手机2">
+                        {{else value == '小米手机1S'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_2.png' alt="小米手机1S">
+                        {{else value == '小米手机1'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_1.png' alt="小米手机1">
+                        {{else value == '小米盒子'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_8.png' alt="小米盒子">
+                        {{/if}}
+                        {{/each}}
+                    </p>
+                </div>
+                {{/if}}
+                <div class="price">&yen; ${price}
+                    {{if price < market_price}}
+                    <del class="market_price">&yen; ${market_price}</del>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="product_pick">
+                <div class="h_box">
+                    {{if stylelength != 0}}
+                    {{each(stylename, stylevalue) style}}
+                    <div class="flex_1">
+                        <div data-type="select" class="select">
+                            <div data-value="01" class="option"></div>
+                            <select class="xm-select-style">
+                                {{each(index, value) stylevalue}}
+                                <option {{if product_id == value}}selected="selected"{{/if}} value="${value}">${index}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
                     {{/each}}
-                </p>
-            </div>
-            {{/if}}
-            <div class="price">&yen; ${price}
-                {{if price < market_price}}
-                <del class="market_price">&yen; ${market_price}</del>
-                {{/if}}
-            </div>
-        </div>
-        <div class="product_pick">
-            <div class="h_box">
-                {{if stylelength != 0}}
-                {{each(stylename, stylevalue) style}}
-                <div class="flex_1">
-                    <div data-type="select" class="select">
-                        <div data-value="01" class="option"></div>
-                        <select class="xm-select-style">
-                            {{each(index, value) stylevalue}}
-                            <option {{if product_id == value}}selected="selected"{{/if}} value="${value}">${index}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                </div>
-                {{/each}}
-                {{/if}}
-                <div class="flex_1">
-                    <div data-type="select" class="select">
-                        <div data-value="01" class="option"></div>
-                        <select id="xm-select-product-addcart" class="xm-select-consumption">
-                            {{each(index, value) selectConsumptionArray}}
-                            <option value="${value}">${value}</option>
-                            {{/each}}
-                        </select>
+                    {{/if}}
+                    <div class="flex_1">
+                        <div data-type="select" class="select">
+                            <div data-value="01" class="option"></div>
+                            <select id="xm-select-product-addcart" class="xm-select-consumption">
+                                {{each(index, value) selectConsumptionArray}}
+                                <option value="${value}">${value}</option>
+                                {{/each}}
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="product_addCart">
-            {{if is_cos == false}}
-            {{if is_change_style == true}}
-            <a action="NextShoppingCartBtn" class="button active_button" href="javascript:;">定制部分单品</a>
-            {{else}}
-            <a action="AddShoppingCartBtn" class="button active_button" href="javascript:;">加入购物车</a>
-            {{/if}}
-            {{else}}
-            <a href="javascript:;" class="button disable_button">暂时缺货</a>
-            {{/if}}
+            <div class="product_addCart">
+                {{if is_cos == false}}
+                {{if is_change_style == true}}
+                <a id="NextShoppingCartBtn" class="button active_button" href="javascript:;">定制部分单品</a>
+                {{else}}
+                <a id="AddShoppingCartBtn" class="button active_button" href="javascript:;">加入购物车</a>
+                {{/if}}
+                {{else}}
+                <a href="javascript:;" class="button disable_button">暂时缺货</a>
+                {{/if}}
+            </div>
         </div>
     </div>
 </div>

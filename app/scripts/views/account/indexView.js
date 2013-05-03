@@ -13,8 +13,8 @@ define([
     var IndexView = Backbone.View.extend({
         el: $('#viewbody'),
         events: {
-            'click #AccountLoginBtn': 'login',
-            'click #AccountLogoutBtn': 'logout'
+            'click #login_template #AccountLoginBtn': 'login',
+            'click #logout_template #AccountLogoutBtn': 'logout'
         },
         initialize: function(options){
             console.log('account indexView');

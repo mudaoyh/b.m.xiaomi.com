@@ -1,19 +1,55 @@
-{{if !_isApp }}
-<div id="crumbs" class="crumbs">
-    <ul>
-        <li><a href="#/home/index1"><span>首页</span></a></li>
-        <li><a href="#/product/category">分类浏览</a></li>
-        <li><a href="#/product/view/${product_id}">商品详情</a></li>
-        <li><a href="javascript:;">套餐选择</a></li>
-    </ul>
+<div id="style_list_template">
+    {{if !_isApp }}
+    <div id="crumbs" class="crumbs">
+        <ul>
+            <li><a href="#/home/index1"><span>首页</span></a></li>
+            <li><a href="#/product/category">分类浏览</a></li>
+            <li><a href="#/product/view/${product_id}">商品详情</a></li>
+            <li><a href="javascript:;">套餐选择</a></li>
+        </ul>
+    </div>
+    {{/if}}
+    {{if _isApp }}
+    <div id="toolbar_app" class="header_02 mb20">
+        <a href="javascrpit:;" class="back" onclick="history.back();return false;">
+            <img src="http://p.www.xiaomi.com/m/reserve/mi2/130322/images/arrow_left.png">
+        </a>
+        <h3><span>套装详情</span></h3>
+    </div>
+    {{/if}}
+    <div class="shopping_stylelist mlr20 mt-20">
+        <div class="list_nav list_stylelist_tmp">
+            <ul>
+                {{each(index, products) result}}
+                <li>
+                    <div class="items">
+                        <div class="h_box">
+                            <div class="imgurl"><img src="${$item.getFirstImg(products)}"></div>
+                            <div class="stylelist_info">
+                                <p class="product_name">
+                                    <span>${$item.getFirstName(products)}</span>
+                                </p>
+                                <div class="pick_styles" {{if $item.getCount(products) <= 1}}style="display:none"{{/if}}>
+                                <div id="select_group_01" data-type="select" class="select">
+                                    <div data-value="01" class="option"></div>
+                                    <select class="xm-select-item-style">
+                                        {{each products}}
+                                        {{if is_sale == true}}
+                                        <option value="${product_id}" image_url="${image_url[180]}" product_name="${product_name}">${product_style}</option>
+                                        {{/if}}
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+        </li>
+        {{/each}}
+        </ul>
+    </div>
+    <div class="product_addCart mt20">
+        <a id="AddStyleShoppingCartBtn" class="button active_button" href="javascript:;">加入购物车</a>
+    </div>
 </div>
-{{/if}}
-{{if _isApp }}
-<div id="toolbar_app" class="header_02 mb20">
-    <a href="javascrpit:;" class="back" onclick="history.back();return false;">
-        <img src="http://p.www.xiaomi.com/m/reserve/mi2/130322/images/arrow_left.png">
-    </a>
-    <h3><span>套装详情</span></h3>
 </div>
-{{/if}}
-
