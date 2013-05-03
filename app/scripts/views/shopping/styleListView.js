@@ -11,6 +11,10 @@ define([
 ], function($, _, Backbone, Mipu, Shopping, StyleListTemplate){
     var StyleList = Backbone.View.extend({
         el: $('#viewbody'),
+        events: {
+            'change #style_list_template .xm-select-item-style': 'selectChange',
+            'click #style_list_template #AddStyleShoppingCartBtn': 'addStyleShoppingCart'
+        },
         initialize: function(){
             console.log('Stylelist init');
             this.$el.undelegate('#viewbody', 'change');
@@ -67,6 +71,38 @@ define([
                 self.options.res.product_id = self.options.product_id;
                 callback(self);
             });
+        },
+        selectChange: function(e){
+            var selfEle, current, product_name, image_url;
+            selfEle = e.currentTarget;
+
+            Mipu.formUi.setSelect.changeSelect(selfEle);
+            current = $(selfEle).find('option:selected');
+            product_name = current.attr('product_name');
+            image_url = current.attr('image_url');
+
+            var item = $(selfEle).parentsUntil('.items');
+            item.find('.imgurl img').attr('src', image_url);
+            item.find('.product_name span').html(product_name);
+        },
+        addStyleShoppingCart: function(e){
+            var item_id, options;
+            item_id = [];
+            $('.xm-select-item-style').each(function(){
+                item_id.push($(this).find('option:selected').val());
+            });
+            item_id = item_id.join('|');
+
+            options = {
+                param: {
+                    'product_id': this.options.product_id,
+                    'consumption': this.options.consumption,
+                    'item_id': item_id
+                }
+            };
+            Shopping.addCart(options, function(res, self){
+                Mipu.popup('成功加入购物车');
+            }, this);
         }
     });
     return new StyleList;

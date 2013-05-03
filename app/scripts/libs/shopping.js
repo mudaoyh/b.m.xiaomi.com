@@ -4,17 +4,15 @@
 
 define(['libs/mipu'], function(Mipu){
     var Shopping = {
-        addCart: function(product_id, consumption, callback, that){
-            var options = {
+        addCart: function(options, callback, that){
+            var defaults, setting;
+            defaults = {
                 url: 'shopping/addCart',
-                param: {
-                    'product_id': product_id,
-                    'consumption': consumption
-                },
                 that: that,
                 loading: false
             };
-            Mipu.request(options, function(res, self){
+            setting = $.extend(true, defaults, options);
+            Mipu.request(setting, function(res, self){
                 callback(res, self);
             });
         }

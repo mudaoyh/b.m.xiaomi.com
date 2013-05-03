@@ -91,10 +91,16 @@ define([
             location.replace('#/product/view/'+product_id);
         },
         addCart: function(e){
-            var product_id, consumption;
+            var product_id, consumption, options;
             product_id = this.options.product_id;
             consumption = $('#xm-select-product-addcart').find('option:selected').val();
-            Shopping.addCart(product_id, consumption, function(res, self){
+            options = {
+                param: {
+                    'product_id': product_id,
+                    'consumption': consumption
+                }
+            };
+            Shopping.addCart(options, function(res, self){
                 Mipu.popup('成功加入购物车');
             }, this);
         },
