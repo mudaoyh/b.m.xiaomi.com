@@ -1,0 +1,81 @@
+<div id="cart_list_template">
+    <div id="crumbs" class="crumbs">
+        <ul>
+            <li><a href="#home/index1"><span>首页</span></a></li>
+            <li><a href="javascript:;">我的购物车</a></li>
+        </ul>
+    </div>
+    <div class="shopping_cartlist mlr20 mt-20 mb20 has_bottom_panel" id="ShoppingIndex">
+        {{if !!hasBargainSupply}}
+        <div class="bargain">
+            <div class="title">
+                <h3>加价购<span></span></h3>
+            </div>
+            <div class="checkbox_02">
+                <div class="list_nav" id="checkbox_group_01">
+                    <ul>
+                        {{each(index, value) bargains}}
+                        <li>
+                            <div data-type="checkbox" class="checkbox {{if !!checked}}selected{{/if}}">
+                                <label>
+                                    <div class="label check_hbox">
+                                        <div class="name" product_id="${product_id}" promotion_id="${actId}" data-itemId="${index}">
+                                            <p data-promo="${index}">${bargain_name}</p>
+                                        </div>
+                                        <div class="more">
+                                            <a href="javascript:;" class="lnk extendProductViewBtn"  desc="${product_brief}" image_url="${image_url[470]}" price="${salePrice}"><span class="arrow">&nbsp;</span></a>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+        <div class="mt20">
+            <div class="list_order_tmp list_nav">
+                <ul>
+                    {{each(index, value) items}}
+                    <li>
+                        <div class="items {{if showType == 'gift'}}gift{{else showType == 'seckill'}}kill{{else showType == 'special'}}coupon{{else showType == 'ernie'}}award{{/if}}"><a href="#ac=shopping&op=editconsumption&product_id=${product_id}&itemId=${itemId}" class="lnk h_box">
+                            <div class="imgurl"><img src="${image_url[180]}"></div>
+                            <div class="info">
+                                <p class="name">{{if showType == 'bargain'}}[加价购]{{/if}}${product_name}</p>
+                                <div class="order_items">
+                                    <div class="price_info"><span class="sale_price">售价：&yen;${salePrice}</span><span class="num">数量：${num}</span><span class="subtotal">小计：&yen;${subtotal}</span></div>
+                                </div>
+                            </div></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class="bottom_panel">
+            <div class="settle_panel">
+                <div class="goods_amount">
+                    <div class="price">应付金额<strong>&yen;${totalprice}</strong></div>
+                </div>
+                <div class="settle_btn"><a href="javascript:;" class="button active_button"  id="ShoppingCheckOutBtn">去结算</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="shopping_delcart bargain_supply mlr20 mt-20" id="extendProductView" style="display:none;">
+        <div class="box box_01">
+            <div class="imgurl"><img id="extendProductViewImageUrl" src=""></div>
+        </div>
+        <div class="box box_02">
+            <div class="product_info">
+                <div class="info">
+                    <h3 class="name" id="extendProductViewDesc"></h3>
+                </div>
+                <div class="price" id="extendProductViewPrice"></div>
+            </div>
+        </div>
+        <div class="box box_04 mt20"><a id="returnShoppingBtn" href="javascript:;" class="button disable_button">返回</a></div>
+    </div>
+</div>
+

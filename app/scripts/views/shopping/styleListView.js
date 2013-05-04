@@ -9,14 +9,14 @@ define([
     'libs/api',
     'text!templates/shopping/styleListTemplate.html'
 ], function($, _, Backbone, Mipu, Api, StyleListTemplate){
-    var StyleList = Backbone.View.extend({
+    var StyleListView = Backbone.View.extend({
         el: $('#viewbody'),
         events: {
             'change #style_list_template .xm-select-item-style': 'selectChange',
             'click #style_list_template #AddStyleShoppingCartBtn': 'addStyleShoppingCart'
         },
         initialize: function(){
-            console.log('Stylelist init');
+            console.log('StyleList init');
         },
         render: function(product_id, consumption){
             this.options.product_id = product_id;
@@ -104,5 +104,5 @@ define([
             });
         }
     });
-    return new StyleList;
+    return new StyleListView;
 });

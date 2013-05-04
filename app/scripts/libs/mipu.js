@@ -11,7 +11,8 @@ define([
         sso_path: 'http://app.shopapi.xiaomi.com/v1/authorize/sso?client_id=',
         logout_path: 'http://app.shopapi.xiaomi.com/v1/authorize/sso_logout?client_id=',
         ajax_error_url: [
-            'user/show'
+            'user/show',
+            'shopping/cartlist'
         ],
         need_modify_cart: [
             'shopping/addcart',

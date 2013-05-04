@@ -52,7 +52,16 @@ define([
         'shopping': {
             'addCart': function(options, callback){
                 var setting = $.extend(true, {
-                    'url': 'shopping/addCart',
+                    'url': 'shopping/addcart',
+                    'loading': false
+                }, options);
+                Mipu.request(setting, function(res, self){
+                    callback(res, self);
+                });
+            },
+            'delCart': function(options, callback){
+                var setting = $.extend(true, {
+                    'url': 'shopping/delcart',
                     'loading': false
                 }, options);
                 Mipu.request(setting, function(res, self){
@@ -62,6 +71,14 @@ define([
             'styleList': function(options, callback){
                 var setting = $.extend(true, {
                     'url': 'shopping/stylelist'
+                }, options);
+                Mipu.request(setting, function(res, self){
+                    callback(res, self);
+                });
+            },
+            'cartList': function(options, callback){
+                var setting = $.extend(true, {
+                    'url': 'shopping/cartlist'
                 }, options);
                 Mipu.request(setting, function(res, self){
                     callback(res, self);

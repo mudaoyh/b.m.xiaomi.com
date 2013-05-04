@@ -13,7 +13,8 @@ define([
     'views/product/listView',
     'views/product/productView',
     'views/account/indexView',
-    'views/shopping/styleListView'
+    'views/shopping/styleListView',
+    'views/shopping/cartListView'
 ], function(
     _,
     Backbone,
@@ -26,7 +27,8 @@ define([
     ListView,
     ProductView,
     AccountView,
-    StyleListView
+    StyleListView,
+    CartListView
     ){
 
     var AppRouter = Backbone.Router.extend({
@@ -35,12 +37,13 @@ define([
             'home/yuyue': 'showYuyue',
             'home/qianggounew': 'showQianggou',
             'account/index': 'showAccount',
-            'shopping/index': 'showShopping',
             'product/category': 'showProductCategory',
             'product/list/:cate_id': 'showProductList',
             'product/list/:cate_id/:adapt': 'showProductList',
             'product/view/:product_id': 'showProductView',
+            'shopping/index': 'showShopping',
             'shopping/stylelist/:product_id/:consumption': 'showShoppingStyleList',
+            'shopping/cartlist': 'showCartList',
             '*actions': 'showDefault'
         },
         initialize: function(){
@@ -91,6 +94,9 @@ define([
         showShoppingStyleList: function(product_id, consumption){
             console.log('showProductStyleList');
             StyleListView.render(product_id, consumption);
+        },
+        showCartList: function(){
+            CartListView.render();
         },
         showDefault: function(actions){
             var options = {

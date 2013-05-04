@@ -19,6 +19,9 @@ define([
         render: function(){
             this.$el.html(HeaderTemplate);
             $('#header').html(this.$el);
+        },
+        remove: function(){
+            this.$el.remove();
         }
     });
 

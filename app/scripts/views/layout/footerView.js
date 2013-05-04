@@ -19,6 +19,9 @@ define([
         render: function(){
             this.$el.html(FooterTemplate);
             $('#footer').html(this.$el);
+        },
+        remove: function(){
+            this.$el.remove();
         }
     });
 
