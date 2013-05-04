@@ -17,7 +17,6 @@ define([
         },
         initialize: function(){
             console.log('Stylelist init');
-            this.$el.undelegate('#viewbody', 'change');
         },
         render: function(product_id, consumption){
             this.options.product_id = product_id;
