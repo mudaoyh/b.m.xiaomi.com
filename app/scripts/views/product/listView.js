@@ -7,10 +7,11 @@ define([
     'backbone',
     'libs/mipu',
     'libs/util',
+    'libs/api',
     'text!templates/product/listTemplate.html',
     'text!templates/product/listItemTemplate.html',
     'text!templates/product/phoneListTemplate.html'
-], function($, _, Backbone, Mipu, Util, ListTemplate, ListItemTemplate, PhoneListTemplate){
+], function($, _, Backbone, Mipu, Util, Api, ListTemplate, ListItemTemplate, PhoneListTemplate){
 
     var ListView = Backbone.View.extend({
         el: $('#viewbody'),
@@ -43,16 +44,15 @@ define([
                 callback(this);
             }else{
                 var options = {
-                    url: 'product/list',
-                    param: {
+                    'param': {
                         'cateid': this.options.cate_id,
                         'pageindex': this.options.pageindex,
                         'pagesize': this.options.pagesize,
                         'adapt': this.options.adapt
                     },
-                    that: this
+                    'that': this
                 };
-                Mipu.request(options, function(res, self){
+                Api.product.list(options, function(res, self){
                     var data = JSON.stringify(res.data);
                     Util.SessionCache.set( self.options.cacheName, data );
                     self.options.res = res.data;

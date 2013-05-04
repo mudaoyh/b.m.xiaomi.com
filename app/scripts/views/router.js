@@ -4,7 +4,7 @@
 define([
     'underscore',
     'backbone',
-    'libs/mipu',
+    'libs/api',
     'views/layout/headerView',
     'views/layout/footerView',
     'views/home/indexView',
@@ -17,7 +17,7 @@ define([
 ], function(
     _,
     Backbone,
-    Mipu,
+    Api,
     HeaderView,
     FooterView,
     IndexView,
@@ -93,7 +93,10 @@ define([
             StyleListView.render(product_id, consumption);
         },
         showDefault: function(actions){
-            Mipu.activityControl(actions, function(isActivity, res, self){
+            var options = {
+                'that': this
+            };
+            Api.activity.control(actions, options, function(isActivity, res, self){
                 if(isActivity){
                     if(res.activity_type == 'other'){
                         location.replace(res.activity_url);
@@ -103,7 +106,7 @@ define([
                     return;
                 }
                 console.error('404: '+actions);
-            }, this);
+            });
         },
         nav: function(hash){
             this.navigate(hash, {trigger: true})

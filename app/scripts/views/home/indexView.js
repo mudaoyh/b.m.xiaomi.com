@@ -6,8 +6,9 @@ define([
     'underscore',
     'backbone',
     'libs/mipu',
+    'libs/api',
     'text!templates/home/indexTemplate.html'
-], function($, _, Backbone, Mipu, indexTemplate){
+], function($, _, Backbone, Mipu, Api, indexTemplate){
 
     var IndexView = Backbone.View.extend({
         el: $('#viewbody'),
@@ -15,18 +16,22 @@ define([
             console.log('indexView载入render首页模板');
         },
         render: function(){
-            var options = {
-                url: 'home/index',
-                version: 'v2',
-                that: this
-            };
-            Mipu.request(options, function(res, self){
+            this.process(function(self){
                 var data, compileTemplate;
                 data = {
-                    'items' : res.data.items
+                    'items' : self.options.res
                 };
                 compileTemplate = _.template(indexTemplate, data);
                 self.$el.html(compileTemplate);
+            });
+        },
+        process: function(callback){
+            var options = {
+                that: this
+            };
+            Api.home.index(options, function(res, self){
+                self.options.res = res.data.items;
+                callback(self);
             });
         }
     });

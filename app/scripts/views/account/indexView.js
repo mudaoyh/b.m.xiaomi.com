@@ -7,28 +7,24 @@ define([
     'underscore',
     'backbone',
     'libs/mipu',
+    'libs/api',
     'text!templates/account/loginTemplate.html',
     'text!templates/account/logoutTemplate.html'
-], function($, tmpl, _, Backbone, Mipu, LoginTemplate, LogoutTemplate){
+], function($, tmpl, _, Backbone, Mipu, Api, LoginTemplate, LogoutTemplate){
     var IndexView = Backbone.View.extend({
         el: $('#viewbody'),
         events: {
             'click #login_template #AccountLoginBtn': 'login',
             'click #logout_template #AccountLogoutBtn': 'logout'
         },
-        initialize: function(options){
+        initialize: function(){
             console.log('account indexView');
         },
         render: function(){
-            var options;
-            options = {
-                url: 'user/show',
-                that: this
-            };
-            Mipu.request(options, function(res, self){
+            this.process(function(self){
                 var compileTemplate, data;
-                if(res.result == 'ok'){
-                    data = res.data;
+                if(self.options.res.result == 'ok'){
+                    data = self.options.res.data;
                     compileTemplate = $.tmpl(LogoutTemplate, data);
                     console.log('已登录');
                 }else{
@@ -36,6 +32,15 @@ define([
                     console.log('未登录');
                 }
                 self.$el.html(compileTemplate);
+            });
+        },
+        process: function(callback){
+            var options = {
+                that: this
+            };
+            Api.user.show(options, function(res, self){
+                self.options.res = res;
+                callback(self);
             });
         },
         login: function(){

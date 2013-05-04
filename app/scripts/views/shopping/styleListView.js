@@ -6,9 +6,9 @@ define([
     'underscore',
     'backbone',
     'libs/mipu',
-    'libs/shopping',
+    'libs/api',
     'text!templates/shopping/styleListTemplate.html'
-], function($, _, Backbone, Mipu, Shopping, StyleListTemplate){
+], function($, _, Backbone, Mipu, Api, StyleListTemplate){
     var StyleList = Backbone.View.extend({
         el: $('#viewbody'),
         events: {
@@ -59,13 +59,12 @@ define([
         },
         process: function(callback){
             var options = {
-                url: 'shopping/stylelist',
-                param: {
+                'param': {
                     'product_id': this.options.product_id
                 },
-                that: this
+                'that': this
             };
-            Mipu.request(options, function(res, self){
+            Api.shopping.styleList(options, function(res, self){
                 self.options.res = res.data;
                 self.options.res.product_id = self.options.product_id;
                 callback(self);
@@ -93,15 +92,16 @@ define([
             item_id = item_id.join('|');
 
             options = {
-                param: {
+                'param': {
                     'product_id': this.options.product_id,
                     'consumption': this.options.consumption,
                     'item_id': item_id
-                }
+                },
+                'that': this
             };
-            Shopping.addCart(options, function(res, self){
+            Api.shopping.addCart(options, function(res, self){
                 Mipu.popup('成功加入购物车');
-            }, this);
+            });
         }
     });
     return new StyleList;

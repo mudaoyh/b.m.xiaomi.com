@@ -1,7 +1,7 @@
 {{each(index, value) product}}
 <li>
     <div class="product items {{if is_cos}}is_cos{{else price != market_price}}is_discount{{/if}}">
-        <a href="javascript:;" class="ScanProductViewBtn" product_id="${product_id}">
+        <a href="#product/view/${product_id}" class="ScanProductViewBtn" product_id="${product_id}">
             <div class="imgurl"><img src="${image_url[180]}"></div>
             <div class="info">
                 <p class="name">${product_name}</p>

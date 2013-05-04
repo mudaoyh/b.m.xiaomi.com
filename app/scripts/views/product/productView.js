@@ -7,10 +7,10 @@ define([
     'backbone',
     'libs/mipu',
     'libs/util',
-    'libs/shopping',
+    'libs/api',
     'text!templates/product/productViewTemplate.html',
     'lazyload'
-], function($, _, Backbone, Mipu, Util, Shopping, ProductViewTemplate){
+], function($, _, Backbone, Mipu, Util, Api, ProductViewTemplate){
     var ProductView = Backbone.View.extend({
         el: $('#viewbody'),
         events: {
@@ -43,30 +43,14 @@ define([
                 callback(this);
             }else{
                 var options = {
-                    url: 'product/view',
-                    param: {
+                    'param': {
                         'product_id': this.options.product_id
                     },
-                    that: this
+                    'that': this
                 };
-                Mipu.request(options, function(res, self){
-                    var product, selectConsumptionArray, i, k, stylelist;
-
-                    product = res.data.result;
-                    selectConsumptionArray = [];
-
-                    for(i = 1,k=parseInt(product.buy_limit); i<=k; i+=1){
-                        selectConsumptionArray.push(i);
-                    }
-                    // 购买限制 buy_limit
-                    product.selectConsumptionArray = selectConsumptionArray;
-
-                    product.stylelength = 0;
-                    for(stylelist in product.style){
-                        product.stylelength += 1;
-                    }
-                    self.options.res = product;
-                    Util.SessionCache.set(self.options.cacheName, JSON.stringify(product));
+                Api.product.view(options, function(res, self){
+                    self.options.res = res;
+                    Util.SessionCache.set(self.options.cacheName, JSON.stringify(res));
                     callback(self);
                 });
             }
@@ -95,20 +79,21 @@ define([
             product_id = this.options.product_id;
             consumption = $('#xm-select-product-addcart').find('option:selected').val();
             options = {
-                param: {
+                'param': {
                     'product_id': product_id,
                     'consumption': consumption
-                }
+                },
+                'that': this
             };
-            Shopping.addCart(options, function(res, self){
+            Api.shopping.addCart(options, function(res, self){
                 Mipu.popup('成功加入购物车');
-            }, this);
+            });
         },
         navStyleList: function(e){
             var product_id, consumption;
             product_id = this.options.product_id;
             consumption = $('#xm-select-product-addcart').find('option:selected').val();
-            location.href = '#/shopping/stylelist/'+product_id+'/'+consumption;
+            location.href = '#shopping/stylelist/'+product_id+'/'+consumption;
         }
     });
     return new ProductView;

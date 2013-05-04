@@ -6,7 +6,7 @@ define(['views/router'], function( Router){
 
     var init = function(){
         console.log('app.js 执行init方法');
-        var appRouter = new Router();
+        new Router();
         Backbone.history.start();
     };
 

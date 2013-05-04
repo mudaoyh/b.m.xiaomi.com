@@ -7,8 +7,9 @@ define([
     'backbone',
     'libs/mipu',
     'libs/util',
+    'libs/api',
     'text!templates/product/categoryTemplate.html'
-], function($, _, Backbone, Mipu, Util,  CategoryTemplate){
+], function($, _, Backbone, Mipu, Util, Api, CategoryTemplate){
 
     var CategoryView = Backbone.View.extend({
         el: $('#viewbody'),
@@ -32,10 +33,10 @@ define([
                 this.options.res = data;
                 callback(this);
             }else{
-                Mipu.request({
-                    url: 'product/category',
-                    that: this
-                }, function(res, self){
+                var options = {
+                    'that': this
+                };
+                Api.product.category(options, function(res, self){
                     var data = JSON.stringify(res.data);
                     Util.SessionCache.set( self.options.cacheName, data );
                     self.options.res = res.data;
