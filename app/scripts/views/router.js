@@ -80,7 +80,6 @@ define([
                 ListView.showPhoneList();
             }else{
                 ListView.set(cate_id, adapt);
-                ListView.render();
             }
         },
         showProductView: function(product_id){
