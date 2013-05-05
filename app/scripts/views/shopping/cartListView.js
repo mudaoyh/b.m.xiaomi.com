@@ -14,7 +14,7 @@ define([
     var CartListView = Backbone.View.extend({
         el: $('#viewbody'),
         events: {
-            'click #cart_list_template #checkbox_group_01 .name': 'a'
+            'click #cart_list_template #checkbox_group_01 .name': 'editPromotion'
         },
         initialize: function(){
             console.log('CartListView init');
@@ -33,7 +33,6 @@ define([
                 // 购物车有商品
                 self.$el.html($.tmpl(CartListTemplate, self.options.res.data));
                 // 隐藏底部导航
-                console.dir(self.options.res.data);
                 FooterView.remove();
             });
         },
@@ -46,7 +45,7 @@ define([
                 callback(self);
             });
         },
-        a: function(e){
+        editPromotion: function(e){
             var selfEle, product_id, promotion_id, itemId;
             selfEle = e.currentTarget;
             product_id = $(selfEle).attr('product_id');
