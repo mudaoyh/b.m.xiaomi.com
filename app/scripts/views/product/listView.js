@@ -21,8 +21,6 @@ define([
                 'adaptType': ['MI1', 'MI1S', 'MI2', 'BOX', 'MI2S', 'MI2A'],
                 'adaptItems': {'MI1':'1','MI1S':'1S','MI2':'2','BOX':'盒子','MI2S':'2S','MI2A':'2A'}
             };
-
-            this.on('set:done', this.render);
         },
         events: {
             'click #list_template #PorductListMoreBtn': 'more',
@@ -38,8 +36,6 @@ define([
             this.options.pagesize = 10;
             this.options.pageindex = page_index;
             this.options.cacheName = 'local_list_'+cate_id+'_'+page_index+'_'+adapt;
-
-            this.trigger('set:done');
         },
         process: function(callback){
             if( Util.SessionCache.has(this.options.cacheName) ){
