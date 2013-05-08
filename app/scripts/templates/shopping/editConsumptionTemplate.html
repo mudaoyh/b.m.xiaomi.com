@@ -1,0 +1,61 @@
+<div id="edit_consumption_template">
+    <div id="crumbs" class="crumbs">
+        <ul>
+            <li><a href="#home/index1"><span>首页</span></a></li>
+            <li><a href="#shopping/cartlist">我的购物车</a></li>
+            <li><a href="javascript:;">修改购物车</a></li>
+        </ul>
+    </div>
+    <div class="shopping_delcart mlr20 mt-20">
+        <div class="box box_01">
+            <div class="imgurl"><img src="${image_url[800]}"></div>
+        </div>
+        <div class="box box_02">
+            <div class="product_info">
+                <div class="info">
+                    <h3 class="name">${product_name}</h3>
+                    <span class="price">&yen;${salePrice}</span>
+                </div>
+                {{if !!adapt}}
+                <div class="adapt">
+                    <p><span>适配机型：</span>
+                        {{each(index, value) adapt}}
+                        {{if value == '小米手机2S'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_16.png' alt="小米手机2s">
+                        {{else value == '小米手机2A'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_32.png' alt="小米手机2A">
+                        {{else value == '小米手机2'}}
+                        <img src="http://p.www.xiaomi.com/m/app/v2/images/adapt_4.png" alt="小米手机2">
+                        {{else value == '小米手机1S'}}
+                        <img src="http://p.www.xiaomi.com/m/app/v2/images/adapt_2.png" alt="小米手机1S">
+                        {{else value == '小米手机1'}}
+                        <img src="http://p.www.xiaomi.com/m/app/v2/images/adapt_1.png" alt="小米手机1">
+                        {{else value == '小米盒子'}}
+                        <img src='http://p.www.xiaomi.com/m/app/v2/images/adapt_8.png' alt="小米盒子">
+                        {{/if}}
+                        {{/each}}
+                    </p>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+        <div class="box box_03 mt20 h_box">
+            {{if can_change_num == true}}
+            <div class="flex_1">
+                <div data-type="select" class="select">
+                    <div data-value="01" class="option"></div>
+                    <select id="xm-select-edit-consumption">
+                        {{each(index, value) selectConsumptionArray}}
+                        <option value="${value}">${value}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+        {{if can_delete == true}}
+        <div class="box box_04 mt20"><a href="javascript:;" class="button disable_button"  id="DelShoppingCartBtn">删除该商品</a></div>
+        {{/if}}
+    </div>
+</div>
+

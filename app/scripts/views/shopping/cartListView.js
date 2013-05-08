@@ -9,12 +9,16 @@ define([
     'libs/api',
     'views/layout/footerView',
     'text!templates/shopping/cartListTemplate.html',
-    'text!templates/shopping/cartListEmptyTemplate.html'
-], function($, _, Backbone, Mipu, Api, FooterView, CartListTemplate, CartListEmptyTemplate){
+    'text!templates/shopping/cartListEmptyTemplate.html',
+    'text!templates/shopping/extendProductViewTemplate.html'
+], function($, _, Backbone, Mipu, Api, FooterView, CartListTemplate, CartListEmptyTemplate, extendProductViewTemplate){
     var CartListView = Backbone.View.extend({
         el: $('#viewbody'),
         events: {
-            'click #cart_list_template #checkbox_group_01 .name': 'editPromotion'
+            'click #cart_list_template #checkbox_group_01 .name': 'editPromotion',
+            'click #cart_list_template #ShoppingCheckOutBtn': 'checkOut',
+            'click #cart_list_template .extendProductViewBtn': 'productView',
+            'click #cart_list_template #returnShoppingBtn': 'render'
         },
         initialize: function(){
             console.log('CartListView init');
@@ -48,8 +52,8 @@ define([
         editPromotion: function(e){
             var selfEle, product_id, promotion_id, itemId;
             selfEle = e.currentTarget;
-            product_id = $(selfEle).attr('product_id');
-            promotion_id = $(selfEle).attr('promotion_id');
+            product_id = $(selfEle).attr('data-productId');
+            promotion_id = $(selfEle).attr('data-promotionId');
             itemId = $(selfEle).attr('data-itemId');
 
             // 用于加入或删除加价购商品调用增加class selected
@@ -92,6 +96,23 @@ define([
             item.removeClass('selected');
             // 重载数据相当与刷新页面
             this.render();
+        },
+        checkOut: function(e){
+            // 结算
+            debugger;
+        },
+        productView: function(e){
+            // 配件预览
+            var selfEle, data, compileTemplate;
+            selfEle = e.currentTarget;
+            data = {
+                'desc': $(selfEle).attr('data-desc'),
+                'imageUrl': $(selfEle).attr('data-imageUrl'),
+                'price': $(selfEle).attr('data-price')
+            };
+
+            compileTemplate = $.tmpl(extendProductViewTemplate, data);
+            this.$el.find('#cart_list_template').html(compileTemplate);
         }
     });
     return new CartListView;

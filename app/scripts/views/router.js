@@ -14,7 +14,8 @@ define([
     'views/product/productView',
     'views/account/indexView',
     'views/shopping/styleListView',
-    'views/shopping/cartListView'
+    'views/shopping/cartListView',
+    'views/shopping/editConsumptionView'
 ], function(
     _,
     Backbone,
@@ -28,7 +29,8 @@ define([
     ProductView,
     AccountView,
     StyleListView,
-    CartListView
+    CartListView,
+    EditConsumptionView
     ){
 
     var AppRouter = Backbone.Router.extend({
@@ -44,6 +46,7 @@ define([
             'shopping/index': 'showShopping',
             'shopping/stylelist/:product_id/:consumption': 'showShoppingStyleList',
             'shopping/cartlist': 'showCartList',
+            'shopping/editconsumption/:product_id/:item_id': 'showEditConsumption',
             '*actions': 'showDefault'
         },
         initialize: function(){
@@ -97,6 +100,10 @@ define([
         },
         showCartList: function(){
             CartListView.render();
+        },
+        showEditConsumption: function(product_id, item_id){
+            // 编辑购物车的商品
+            EditConsumptionView.render(product_id, item_id);
         },
         showDefault: function(actions){
             var options = {

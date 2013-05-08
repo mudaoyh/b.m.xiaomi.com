@@ -52,8 +52,7 @@ define([
         'shopping': {
             'addCart': function(options, callback){
                 var setting = $.extend(true, {
-                    'url': 'shopping/addcart',
-                    'loading': false
+                    'url': 'shopping/addcart'
                 }, options);
                 Mipu.request(setting, function(res, self){
                     callback(res, self);
@@ -61,8 +60,7 @@ define([
             },
             'delCart': function(options, callback){
                 var setting = $.extend(true, {
-                    'url': 'shopping/delcart',
-                    'loading': false
+                    'url': 'shopping/delcart'
                 }, options);
                 Mipu.request(setting, function(res, self){
                     callback(res, self);
