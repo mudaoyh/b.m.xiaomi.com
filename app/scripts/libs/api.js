@@ -81,6 +81,14 @@ define([
                 Mipu.request(setting, function(res, self){
                     callback(res, self);
                 });
+            },
+            'editConsumption': function(options, callback){
+                var setting = $.extend(true, {
+                    'url': 'shopping/editconsumption'
+                }, options);
+                Mipu.request(setting, function(res, self){
+                    callback(res, self);
+                });
             }
         },
         'home': {

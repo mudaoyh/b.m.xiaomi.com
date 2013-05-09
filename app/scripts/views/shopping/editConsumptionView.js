@@ -13,7 +13,8 @@ define([
         el: $('#viewbody'),
         events: {
             'change #edit_consumption_template select': 'selectChange',
-            'click #edit_consumption_template #DelShoppingCartBtn': 'delShopingCart'
+            'click #edit_consumption_template #DelShoppingCartBtn': 'delShoppingCart',
+            'change #edit_consumption_template #xm-select-edit-consumption': 'selectEdit'
         },
         initialize: function(){
             console.log('editConsumptionView init');
@@ -26,6 +27,7 @@ define([
                 var compileTemplate = $.tmpl(EditConsumptionTemplate, self.options.res);
                 self.$el.html(compileTemplate);
                 Mipu.formUi.setSelect.init();
+                Mipu.formUi.setSelect.changeSelect(self.$el.find('#xm-select-edit-consumption'));
             });
         },
         process: function(callback){
@@ -36,41 +38,63 @@ define([
                 _.each(res.data.items, function(product){
                     if(product.itemId == self.options.item_id){
                         self.options.res = product;
-                        console.log('ok');
                         return;
                     }
                 });
-                // Todo 购买限制 buy_limit 有坑
-                var selectConsumptionArray = [];
-                for(i = 1,k=parseInt(self.options.res.buy_limit); i<=k; i+=1){
-                    selectConsumptionArray.push(i);
+                if(!!self.options.res){
+                    var selectConsumptionArray = [];
+                    for(i = 1,k=parseInt(self.options.res.buy_limit); i<=k; i+=1){
+                        selectConsumptionArray.push(i);
+                    }
+                    self.options.res.selectConsumptionArray = selectConsumptionArray;
+                    callback(self);
+                }else{
+                    // 没有匹配到该商品
+                    location.replace('#shopping/cartlist');
                 }
-                self.options.res.selectConsumptionArray = selectConsumptionArray;
-                callback(self);
             });
         },
         selectChange: function(e){
             var selfEle = e.currentTarget;
             Mipu.formUi.setSelect.changeSelect(selfEle);
         },
-        delShopingCart: function(e){
+        delShoppingCart: function(e){
             var product_id, itemId, scenario;
             product_id = this.options.product_id;
             itemId = this.options.item_id;
             scenario = this.options.res.scenario;
 
-            if( confirm('确定要删除该商品吗？') ){
-                Api.shopping.delCart({
-                    'param': {
-                        'product_id': product_id,
-                        'itemId': itemId
-                    },
-                    'that': this
-                }, function(res, self){
-                    Mipu.popup('删除成功');
-                    // Todo 跳转到我的购物车
-                });
-            }
+            Api.shopping.delCart({
+                'param': {
+                    'product_id': product_id,
+                    'itemId': itemId,
+                    'scenario': scenario
+                },
+                'that': this
+            }, function(res, self){
+                Mipu.popup('删除成功');
+                location.replace('#shopping/cartlist');
+            });
+        },
+        selectEdit: function(e){
+            var selfEle, consumption, options;
+            selfEle = e.currentTarget;
+            consumption = $(selfEle).find('option:selected').val();
+
+            options = {
+                'param': {
+                    'consumption': consumption,
+                    'product_id': this.options.res.product_id,
+                    'itemId': this.options.res.itemId,
+                    'scenario': this.options.res.scenario
+                },
+                'that': this
+            };
+
+            Api.shopping.editConsumption(options, function(res, self){
+                // 修改购物车数量成功
+                self.render(self.options.res.product_id, self.options.res.itemId);
+            });
         }
     });
     return new EditConsumptionView;

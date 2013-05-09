@@ -46,7 +46,11 @@
                     <div data-value="01" class="option"></div>
                     <select id="xm-select-edit-consumption">
                         {{each(index, value) selectConsumptionArray}}
-                        <option value="${value}">${value}</option>
+                            {{if index+1 == num}}
+                                <option value="${value}" selected="selected">${value}</option>
+                            {{else}}
+                                <option value="${value}">${value}</option>
+                            {{/if}}
                         {{/each}}
                     </select>
                 </div>

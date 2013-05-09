@@ -93,8 +93,8 @@ define([
             var popup = $('#popup');
             popup.fadeIn('slow').find('p').html(str);
             setTimeout(function(){
-                popup.fadeOut('slow');
-            }, 2500)
+                popup.fadeOut();
+            }, 2000)
         },
         formUi: {
             setSelect: {
