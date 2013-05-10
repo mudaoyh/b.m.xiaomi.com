@@ -62,11 +62,11 @@ define([
                     }
                     if(_.indexOf(self.need_modify_cart, setting.url) !== -1){
                         console.error('需要更新购物车数量');
-                        // Todo
+                        // Todo 更新购物车数量
                     }
                 },
-                error: function(){
-                    console.error('ajax 出错');
+                error: function(e){
+                    console.error('出错status: '+ e.status + ' statusText: ' + e.statusText);
                 },
                 beforeSend: function(){
                     if(setting.loading){
