@@ -29,8 +29,9 @@ define([
         },
         render: function(){
             this.process(function(self){
-                if(self.options.res.result !== 'ok' || !self.options.res.data.items){
-                    // 空购物车
+                var data = self.options.res.data;
+                if(self.options.res.result !== 'ok' || !data.items.length ){
+                    // Todo 空购物车 这有坑
                     self.$el.html($.tmpl(CartListEmptyTemplate));
                     return;
                 }
@@ -98,8 +99,19 @@ define([
             this.render();
         },
         checkOut: function(e){
-            // 结算
-            debugger;
+            /**
+             * Todo 判断是否包含门票
+             * */
+            var options = {
+                'param': {
+                    'address_id': 0
+                },
+                'that': this
+            };
+            // 购物车去结算
+            Api.order.checkOut(options, function(res, self){
+                location.replace('#order/checkout');
+            });
         },
         productView: function(e){
             // 配件预览

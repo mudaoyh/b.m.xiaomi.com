@@ -57,6 +57,7 @@ define([
                             self.doLogin();
                             return false;
                         }
+                        console.error(res);
                         self.popup(res.description);
                     }
                     if(_.indexOf(self.need_modify_cart, setting.url) !== -1){

@@ -1,5 +1,6 @@
 /**
  * api.js 接口
+ * Todo 每个接口增加参数说明，对照shopApi调试台
  */
 
 define([
@@ -106,6 +107,16 @@ define([
             'show': function(options, callback){
                 var setting = $.extend(true, {
                     'url': 'user/show'
+                }, options);
+                Mipu.request(setting, function(res, self){
+                    callback(res, self);
+                });
+            }
+        },
+        'order': {
+            'checkOut': function(options, callback){
+                var setting = $.extend(true, {
+                    'url': 'order/checkout'
                 }, options);
                 Mipu.request(setting, function(res, self){
                     callback(res, self);
