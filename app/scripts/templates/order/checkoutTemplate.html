@@ -1,0 +1,122 @@
+<div id="checkout_template">
+    <div id="crumbs" class="crumbs">
+        <ul>
+            <li><a href="#home/index1"><span>首页</span></a></li>
+            <li><a href="javascript:;">用户结算</a></li>
+        </ul>
+    </div>
+    <div class="order_checkout mlr20">
+        <div class="box box_01">
+            {{if address && address.address_id}}
+            <div class="title">
+                <h3>收货信息</h3>
+            </div>
+            <div class="list_nav list_address">
+                <ul>
+                    <li>
+                        <div class="items"><a href="javascript:;" class="lnk">
+                            <div class="address_info"><span class="province">${address.province.name}</span><span class="city">${address.city.name}</span><span class="district">${address.district.name}</span></div>
+                            <div class="address_detail"><span class="adrress">${address.address}</span><span class="zipcode">(${address.zipcode})</span><span class="consignee">${address.consignee}</span><span class="tel">${address.tel}</span></div></a></div>
+                        <input id="address_id" name="address_id" type="hidden" value="${address.address_id}"/>
+                    </li>
+                </ul>
+            </div>
+            {{else}}
+            <a href="#address/add/checkout" class="button disable_button">添加地址</a>
+            {{/if}}
+        </div>
+        <div class="box box_02">
+            <div class="title">
+                <h3>支付及配送</h3>
+            </div>
+            <div id="radio_group_01" class="radio_group_01">
+                <div class="list_nav">
+                    <ul>
+                        {{each(index, payinfo) payment}}
+                        <li {{if payinfo.pay_id==6}}style="display:none"{{/if}}>
+                        <div data-type="radio" pay_id="${payinfo.pay_id}" class="radio {{if localStorage.getItem('pay_id') == payinfo.pay_id}}selected{{else}}{{if localStorage.getItem('pay_id') == '' || localStorage.getItem('pay_id') == undefined}}{{if payment[0].pay_id == payinfo.pay_id}}selected{{/if}}{{/if}}{{/if}}">
+                            <label>
+                                <div class="label">${payinfo.brief}（${payinfo.tpis}）</div>
+                            </label>
+                        </div>
+                        </li>
+                        {{if payinfo.list}}
+                        {{each(index2, pickupinfo) payinfo.list}}
+                        <li>
+                            <div data-type="radio" pay_id="${payinfo.pay_id}" pickup_id="${pickupinfo.home_id}" class="radio {{if localStorage.getItem('pay_id') == 6}}{{if localStorage.getItem('pickup_id') == pickupinfo.home_id}}selected{{else}}{{if localStorage.getItem('pay_id') == ''}}{{if payinfo.list[0].home_id == pickupinfo.home_id}}selected{{/if}}{{/if}}{{/if}}{{/if}}">
+                                <label>
+                                    <div class="label">
+                                        <h3>${payinfo.brief}（${payinfo.tpis}）</h3>
+                                        <p>${pickupinfo.name}</p>
+                                        <p>${pickupinfo.address}(${pickupinfo.tel})</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </li>
+                        {{/each}}
+                        {{/if}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="box box_03">
+            <div class="title">
+                <h3>送货时间</h3>
+            </div>
+            <div id="radio_group_02" class="radio_group_02">
+                <div class="list_nav">
+                    <ul>
+                        {{each(index, dtime) delivertime}}
+                        <li>
+                            <div data-type="radio" class="radio {{if localStorage.getItem('delivertime') == dtime.value}}selected{{else}}{{if delivertime[0].value == dtime.value}}selected{{/if}}{{/if}}" delivertime="${dtime.value}">
+                                <label>
+                                    <div class="label">${dtime.desc}</div>
+                                </label>
+                            </div>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="box box_04">
+            <div class="title">
+                <h3>发票信息</h3>
+            </div>
+            <div id="radio_group_03" class="radio_group_03">
+                <div class="list_nav">
+                    <ul>
+                        <li>
+                            <div data-type="radio" invoice="0" class="radio  {{if (invoice_id == undefined && invoice_open == false) || invoice_id == 0 || invoice_id==''}}selected{{/if}}">
+                                <label>
+                                    <div class="label">不开发票</div>
+                                </label>
+                            </div>
+                        </li>
+                        {{if hasTicket == 'false'}}
+                        {{each(index, invoiceinfo) invoice}}
+                        <li>
+                            <div data-type="radio" invoice="${invoiceinfo.value}" class="radio {{if invoice_id == invoiceinfo.value}}selected{{else}}{{if invoice[0].value == invoiceinfo.value && invoice_open == true && invoice_id!=0}}selected{{/if}}{{/if}}">
+                                <label>
+                                    <div class="label">${invoiceinfo.desc}</div>
+                                    {{if invoiceinfo.type == 'company'}}
+                                    <div class="invoice hide">
+                                        <div class="input">
+                                            <input type="text"  id="invoice_title" name="invoice_title" placeholder="填写发票名称" value="{{if localStorage.getItem('invoice') == 2}}${invoice_title}{{/if}}">
+                                        </div>
+                                    </div>
+                                    {{/if}}
+                                </label>
+                            </div>
+                        </li>
+                        {{/each}}
+                        {{/if}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="m30"><a id="OrderCheckoutNextBtn" href="javascript:;" class="button active_button">下一步</a></div>
+    </div>
+</div>
+

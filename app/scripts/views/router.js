@@ -16,7 +16,8 @@ define([
     'views/shopping/styleListView',
     'views/shopping/cartListView',
     'views/shopping/editConsumptionView',
-    'views/order/checkoutView'
+    'views/order/checkoutView',
+    'views/address/add'
 ], function(
     _,
     Backbone,
@@ -32,7 +33,8 @@ define([
     StyleListView,
     CartListView,
     EditConsumptionView,
-    CheckoutView
+    CheckoutView,
+    AddressAdd
     ){
 
     var AppRouter = Backbone.Router.extend({
@@ -50,6 +52,8 @@ define([
             'shopping/cartlist': 'showCartList',
             'shopping/editconsumption/:product_id/:item_id': 'showEditConsumption',
             'order/checkout': 'showOrderCheckout',
+            'address/add': 'showAddressAdd',
+            'address/add/:origin': 'showAddressAdd',
             '*actions': 'showDefault'
         },
         initialize: function(){
@@ -110,6 +114,9 @@ define([
         },
         showOrderCheckout: function(){
             CheckoutView.render();
+        },
+        showAddressAdd: function(origin){
+            AddressAdd.render(origin);
         },
         showDefault: function(actions){
             var options = {

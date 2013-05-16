@@ -66,7 +66,7 @@ define([
                     }
                 },
                 error: function(e){
-                    console.error('出错status: '+ e.status + ' statusText: ' + e.statusText);
+                    console.error('Ajax出错status: '+ e.status + ' statusText: ' + e.statusText);
                 },
                 beforeSend: function(){
                     if(setting.loading){

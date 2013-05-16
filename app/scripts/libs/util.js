@@ -72,7 +72,7 @@ define([
             }
         },
         Verify: {
-            CheckMobile: function (mobile) {
+            checkMobile: function (mobile) {
                 var patrn = /^1[3|4|5|8][0-9]\d{8}$/;	// 11 位手机
                 if(!patrn.exec(mobile)) {
                     return false;
@@ -80,7 +80,7 @@ define([
                     return true;
                 }
             },
-            CheckMail: function (mail){
+            checkMail: function (mail){
                 var patrn = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
                 if(!patrn.exec(mail)) {
                     return false;

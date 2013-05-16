@@ -123,6 +123,55 @@ define([
                 });
             }
         },
+        'address': {
+            'add': function(options, callback){
+                var setting = $.extend(true, {
+                    'url': 'address/add'
+                }, options);
+                Mipu.request(setting, function(res, self){
+                    callback(res, self);
+                });
+            },
+            'region': function(options, callback){
+                var setting = $.extend(true, {
+                    'url': 'address/region',
+                    'loading': false
+                }, options);
+                Mipu.request(setting, function(res, self){
+                    callback(res, self);
+                });
+            },
+            'getProvince': function(options, callback){
+                var setting = $.extend(true, {
+                    'param': {
+                        'type': 1
+                    }
+                }, options);
+                this.region(setting, function(res, self){
+                    callback(res, self);
+                });
+            },
+            'getCity': function(options, callback){
+                var setting = $.extend(true, {
+                    'param': {
+                        'type': 2
+                    }
+                }, options);
+                this.region(setting, function(res, self){
+                    callback(res, self)
+                });
+            },
+            'getDistrict': function(options, callback){
+                var setting = $.extend(true, {
+                    'param': {
+                        'type': 3
+                    }
+                }, options);
+                this.region(setting, function(res, self){
+                    callback(res, self);
+                });
+            }
+        },
         'activity': {
             'control': function(actions, options, callback){
                 var setting = $.extend(true, {
