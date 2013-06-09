@@ -17,9 +17,14 @@ define([
         initialize: function(){
             console.log('orderCheckout init');
         },
-        render: function(){
+        render: function(address_id){
             // Todo 获取收货地址
-            this.options.address_id = 0;
+            var address_id = parseInt(address_id);
+            if(!address_id){
+                this.options.address_id = 0;
+            }else{
+                this.options.address_id = address_id;
+            }
 
             this.process(function(self){
                 var data, compileTemplate;

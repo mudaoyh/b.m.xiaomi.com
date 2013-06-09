@@ -52,6 +52,7 @@ define([
             'shopping/cartlist': 'showCartList',
             'shopping/editconsumption/:product_id/:item_id': 'showEditConsumption',
             'order/checkout': 'showOrderCheckout',
+            'order/checkout/:address_id': 'showOrderCheckout',
             'address/add': 'showAddressAdd',
             'address/add/:origin': 'showAddressAdd',
             '*actions': 'showDefault'
@@ -112,8 +113,8 @@ define([
             // 编辑购物车的商品
             EditConsumptionView.render(product_id, item_id);
         },
-        showOrderCheckout: function(){
-            CheckoutView.render();
+        showOrderCheckout: function(address_id){
+            CheckoutView.render(address_id);
         },
         showAddressAdd: function(origin){
             AddressAdd.render(origin);

@@ -1,7 +1,7 @@
 /*
-* main.js 应用入口文件
-* 配置类库的路径
-* */
+ * main.js 应用入口文件
+ * 配置类库的路径
+ * */
 
 require.config({
     baseUrl: '/scripts',
@@ -21,4 +21,3 @@ require(['libs/util', 'views/app'], function(Util, App){
     root._isApp = Util.isApp();
     App.init();
 });
-

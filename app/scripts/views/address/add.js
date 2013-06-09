@@ -30,7 +30,8 @@ define([
             console.log('address:add init');
             this.on({
                 'get:province': this.getProvince,
-                'add:address': this.addressAdd
+                'add:address': this.addressAdd,
+                'nav:address': this.addressNav
             });
         },
         render: function(origin){
@@ -108,8 +109,19 @@ define([
             };
             Api.address.add(options, function(res, self){
                 console.log('添加购物车，成功');
+                self.trigger('nav:address', res.data.result);
             });
 
+        },
+        addressNav: function(address_id){
+            // 提交地址成功，跳转
+            var origin = this.options.origin;
+
+            if( !!origin && origin == 'checkout' ){
+                location.replace( '#order/checkout/' + address_id );
+            }else{
+                location.replace( '#address/list' );
+            }
         },
         changeSelect: function(e){
             var selfEle = e.currentTarget;
@@ -154,7 +166,6 @@ define([
             if(Util.SessionCache.has( this.options.cacheCity )){
                 var data = Util.SessionCache.get( this.options.cacheCity );
                 this.renderOptions(JSON.parse(data)).appendTo(this.$el.find('#city_id'));
-
             }else{
                 // 通过 province_id 获取城市列表
                 var options = {
